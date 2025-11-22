@@ -1,0 +1,56 @@
+package applications.copying;
+import de.wwu.muli.*;
+import de.wwu.muli.solution.*;
+
+public class FreeArrayPaths {
+    public static void main(String[] args) {
+        Solution<Object>[] solutions = Muli.getAllSolutions(FreeArrayPaths::check);
+        boolean foundFirst = false, foundSecond = false;
+        for (Solution s : solutions) {
+            int[] result = (int[]) s.value;
+            if (result[0] == -5 && result[1] == 5) {
+                System.out.println("Expected result found! Nr. 1.");
+                foundFirst = true;
+            } else if (result[0] == 3 && result[1] == 2) {
+                System.out.println("Expected result found! Nr. 2.");
+                foundSecond = true;
+            } else {
+                throw new IllegalStateException("Illegal result found.");
+            }
+        }
+        if (!foundFirst || !foundSecond) {
+            throw new IllegalStateException("Failure to find all results!");
+        }
+    }
+
+
+    private static int[] check() {
+        int val free;
+        int[] result free;
+        if (result.length != 2) {
+            throw Muli.fail();
+        }
+        int idx free;
+        if (idx >= result.length || idx < 0) {
+            throw Muli.fail();
+        }
+
+        int idx2 free;
+        if (idx2 != 0 || idx2 == idx) {
+            throw Muli.fail();
+        }
+        // If idx is 0, idx2 is 1, if idx is 1, idx2 is 0.
+        result[idx] = val;
+        result[idx2] = -val;
+
+        if (val == 5) {
+            return result;
+        } else {
+            val = -6;
+            result[idx] = 2;
+            result[idx2] = 3;
+            return result; // Array should not have changed.
+        }
+    }
+
+}
