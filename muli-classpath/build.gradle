@@ -1,0 +1,16 @@
+group 'de.wwu.muli'
+version '2.0.4-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'maven' // task: install
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
