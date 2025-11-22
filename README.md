@@ -7,7 +7,6 @@ of constraint-logic programming! Muli builds upon Java and extends it with
 features adapted from constraint-logic programming. Muli offers free variables, constraints, encapsulated search,
 and a JVM-based runtime environment that executes your Muli programs.
 
-
 # What is this?
 
 Muli (the **Mü**nster **L**ogic-**I**mperative Language) is a research project at the [Chair for Practical Computer Science](https://www.wi.uni-muenster.de/department/pi), ERCIS, University of Münster.
