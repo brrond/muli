@@ -1,3 +1,3 @@
 [submodule "extendj"]
-	path = extendj
+	path = muli-lang/extendj
 	url = https://bitbucket.org/extendj/extendj
