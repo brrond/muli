@@ -1,0 +1,73 @@
+aspect ExtensionBase {
+
+  public void CompilationUnit.process() {
+    prettyPrint(System.out);
+    for (TypeDecl type : getTypeDeclList()) {
+      System.out.println("Type: " + type.name());
+      for (BodyDecl decl : type.getBodyDeclList()) {
+        if (decl instanceof MethodDecl) { // Traverse methods
+          ((MethodDecl)decl).traverseMethod();
+        } else if (decl instanceof ConstructorDecl) { // Traverse constructors
+          ((ConstructorDecl)decl).traverseMethod();
+        } else if (decl instanceof FieldDecl) { // Process field declarators
+          ((FieldDecl)decl).printFields();
+        } else {
+          System.out.println(decl.getClass().toString());
+        }
+      }
+    }
+  }
+
+  public void MethodDecl.traverseMethod() {
+    System.out.println("\tMethod: " + name());
+    java.util.List<FreeDeclarator> declarators = new ArrayList<FreeDeclarator>();
+    getBlock().traverseStmts(declarators);
+    System.out.println(declarators);
+  }
+
+  public void ConstructorDecl.traverseMethod() {
+    System.out.println("\tConstructor: " + name());
+    java.util.List<FreeDeclarator> declarators = new ArrayList<FreeDeclarator>();
+    getBlock().traverseStmts(declarators);
+    System.out.println(declarators);
+  }
+
+  public void Block.traverseStmts(java.util.List<FreeDeclarator> collector) {
+    for (Stmt stmt : getStmtList()) {
+      if (stmt instanceof VarDeclStmt) {
+        ((VarDeclStmt)stmt).processVarDecl(collector);
+      } else if (stmt instanceof WhileStmt) { // TODO: Further kinds of blocks!
+        Stmt substmt = ((WhileStmt)stmt).getStmt();
+        if (substmt instanceof Block) {
+          ((Block)substmt).traverseStmts(collector);
+        } else {
+          // Non-blocks cannot contain declarations!
+          // System.out.println(".."+substmt.getClass().toString());
+        }
+
+      } else {
+        // TODO: Unhandled stmts - remove as soon as all relevant ones are found!
+        System.out.println("."+stmt.getClass().toString());
+      }
+    }
+  }
+
+  public void VarDeclStmt.processVarDecl(java.util.List<FreeDeclarator> collector) {
+    List<VariableDeclarator> decls = getDeclaratorList();
+    for (VariableDeclarator d : decls) {
+      if (d instanceof FreeDeclarator) {
+        collector.add((FreeDeclarator)d);
+      }
+    }
+  }
+
+  public void FieldDecl.printFields() {
+    System.out.println("\t" + getNumDeclarator() + " Fields; free:");
+    for (FieldDeclarator fd : getDeclaratorList()) {
+      if (fd instanceof FreeDeclarator) {
+        System.out.print("\t\t" + fd.getClass().toString());
+        System.out.println(": " + ((FreeFieldDeclarator)fd).getID());
+      }
+    }
+  }
+}

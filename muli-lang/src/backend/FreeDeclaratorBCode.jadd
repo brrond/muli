@@ -1,0 +1,24 @@
+aspect FreeDeclaratorBCode {
+  public void FreeVariableDeclarator.createBCode(CodeGeneration gen) {
+    // Normally, uninitialised variables reserve a slot / variable index, but do not appear in the LocalVariableTable.
+    // However, a free variable is essentially initialised *as free*. Therefore, add an entry to that table.
+    gen.addLocalVariableEntryAtCurrentPC(name(), type(),
+        localNum(), variableScopeEndLabel(gen));
+    // Also, ensure that maxLocals does not become lesser than the free variable's index, because it won't be found in
+    // static analyses (unlike variables that are actively set).
+    // (Act as if it were a parameter because that is the only publicly exposed way of marking the FV as initialised.)
+    gen.addParameter(localNum(), type());
+    // Emit an explicit initialisation entry, so that variables can become re-initialised if they appear e. g. in loops.
+    this.generatePlaceholderInstructions(gen);
+    // TODO Maybe remove, maybe not? This aids in debugging -- ensuring that all freeVar have been handled!
+    System.out.println("FreeVarDecl " + name() + ":" + localNum());
+  }
+
+  public void FreeVariableDeclarator.generatePlaceholderInstructions(CodeGeneration gen) {
+    // Generate a placeholder and store it in the variable.
+    TypeDecl freeVarPlaceholderType = lookupType("de.wwu.muli.freevar", "FreeVariablePlaceholder");
+    gen.NEW(freeVarPlaceholderType);
+    gen.ASTORE(localNum(), freeVarPlaceholderType);
+    System.out.println("Init FreeVarDecl " + name() + ":" + localNum());
+  }
+}

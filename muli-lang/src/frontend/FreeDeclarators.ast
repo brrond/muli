@@ -1,0 +1,2 @@
+FreeVariableDeclarator : VariableDeclarator;
+FreeFieldDeclarator : FieldDeclarator;

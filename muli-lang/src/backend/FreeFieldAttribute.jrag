@@ -1,0 +1,17 @@
+aspect FreeFieldAttribute {
+  class FreeFieldAttribute extends Attribute {
+    public FreeFieldAttribute(ConstantPool cp) {
+      super(cp, "FreeField");
+
+      // No additional content required; attribute is essentially a flag.
+    }
+  }
+
+  // In addition to regular field attributes, add a FreeField attribute if applicable
+  eq FreeFieldDeclarator.attributes() {
+    Collection<Attribute> attributes = super.attributes();
+    attributes.add(new FreeFieldAttribute(hostType().constantPool()));
+    return attributes;
+  }
+
+}
