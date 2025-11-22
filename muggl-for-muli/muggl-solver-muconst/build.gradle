@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+dependencies {
+	compile project(':muggl-common')
+	compile project(':muggl-solvers')
+} 
+
+sourceSets {
+	main.java.srcDir "src"
+}
+
+eclipse.jdt.file {
+	withProperties { jdt ->
+		setProperties(jdt)
+	}
+}

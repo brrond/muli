@@ -1,0 +1,37 @@
+apply plugin: 'java'
+
+dependencies {
+	runtime project(':muggl-solver-muconst')
+	runtime project(':muggl-solver-jacop')
+	runtime project(':muggl-solver-z3')
+	compile project(':muggl-solvers')
+	compile project(':muggl-common')
+    compile 'org.apache.bcel:bcel:6.2'
+} 
+
+sourceSets {
+	main.java.srcDir "src"
+	test.java.srcDir "junit"
+	test.resources.srcDir "junit-res"
+}
+
+test {
+    testLogging {
+        events "started", "passed", "skipped", "failed"
+        exceptionFormat = 'full'
+    }
+
+    useJUnit {
+        excludeCategories 'de.wwu.muggl.NotYetSupported'
+    }
+	//TODO maxParallelForks = 2
+    tasks.withType(Test) {
+        enableAssertions = false // as long as the org.jacop has the failing assertion
+    }
+}
+
+eclipse.jdt.file {
+	withProperties { jdt ->
+		setProperties(jdt)
+	}
+}
