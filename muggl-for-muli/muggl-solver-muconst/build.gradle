@@ -1,9 +1,10 @@
 apply plugin: 'java'
 
 dependencies {
-	compile project(':muggl-common')
-	compile project(':muggl-solvers')
-} 
+	implementation project(':muggl-common')
+	implementation project(':muggl-solvers')
+    implementation 'log4j:log4j:1.2.17'
+}
 
 sourceSets {
 	main.java.srcDir "src"
