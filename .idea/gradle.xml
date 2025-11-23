@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/muggl-for-muli" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/muggl-for-muli" />
+            <option value="$PROJECT_DIR$/muggl-for-muli/muggl-common" />
+            <option value="$PROJECT_DIR$/muggl-for-muli/muggl-core" />
+            <option value="$PROJECT_DIR$/muggl-for-muli/muggl-solver-jacop" />
+            <option value="$PROJECT_DIR$/muggl-for-muli/muggl-solver-muconst" />
+            <option value="$PROJECT_DIR$/muggl-for-muli/muggl-solver-z3" />
+            <option value="$PROJECT_DIR$/muggl-for-muli/muggl-solvers" />
+            <option value="$PROJECT_DIR$/muggl-for-muli/muggl-swt" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/muli-classpath" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/muli-classpath" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/muli-env" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/muli-env" />
+            <option value="$PROJECT_DIR$/muli-env/muggl-common" />
+            <option value="$PROJECT_DIR$/muli-env/muggl-core" />
+            <option value="$PROJECT_DIR$/muli-env/muggl-solver-jacop" />
+            <option value="$PROJECT_DIR$/muli-env/muggl-solver-muconst" />
+            <option value="$PROJECT_DIR$/muli-env/muggl-solver-z3" />
+            <option value="$PROJECT_DIR$/muli-env/muggl-solvers" />
+            <option value="$PROJECT_DIR$/muli-env/muli-runtime" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/muli-lang" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/muli-lang" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
