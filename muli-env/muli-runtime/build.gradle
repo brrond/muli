@@ -8,15 +8,16 @@ version '2.0.4-SNAPSHOT'
 repositories {
 	mavenLocal()
 	mavenCentral()
-	maven { url 'http://maven-eclipse.github.io/maven' }
+	maven { url 'https://maven-eclipse.github.io/maven' }
 }
 
 dependencies {
-	compile project(':muggl-core')
-	compile project(':muggl-common')
-    compile 'log4j:log4j:1.2.17'
-	compile 'de.wwu.muli:muli-classpath:2.0.4-SNAPSHOT' // needed at compile time, as parts of CP are implemented in native providers.
-    testCompile "junit:junit:4.+"
+	implementation project(':muggl-core')
+	implementation project(':muggl-common')
+    implementation project(':muggl-solvers')
+    implementation 'log4j:log4j:1.2.17'
+	implementation 'de.wwu.muli:muli-classpath:2.0.4-SNAPSHOT' // needed at compile time, as parts of CP are implemented in native providers.
+    testImplementation "junit:junit:4.+"
 }
 
 targetCompatibility = '1.8'

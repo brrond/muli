@@ -1,3 +1,5 @@
+rootProject.name = 'muli-env'
+
 include ':muggl-core', ':muggl-solver-muconst', ':muggl-solver-jacop', ':muggl-solver-z3', ':muggl-common', ':muggl-solvers', ':muli-runtime'
 
 

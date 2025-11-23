@@ -18,8 +18,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static org.junit.Assert.fail;
-
 public class TestableMuliRunner extends MuliRunner {
     private final static Path resourcesRoot;
     private static ArrayList<Map<Object, Object>> coverageMap = null;
@@ -56,10 +54,6 @@ public class TestableMuliRunner extends MuliRunner {
      * @return
      */
     public static ST[] runApplication(final String classFileName, final String[] args) throws ClassFileException, InterruptedException {
-        Options.getInst().symbolicMode = false;
-        Options.getInst().actualCliPrinting = true;
-        Options.getInst().isUnitTest = true;
-
         // Initialize the Application.
         TestableMuliRunner runner = null;
         try {
@@ -78,7 +72,8 @@ public class TestableMuliRunner extends MuliRunner {
         // Find out if execution finished successfully.
         if (runner.app.errorOccured()) {
             // There was an error.
-            fail("Execution did not finish successfully. The reason is:\n" + runner.app.fetchError());
+            System.err.println("Execution did not finish successfully. The reason is:\n" + runner.app.fetchError());
+            assert false;
         } else {
             if (runner.app.getVirtualMachine().getThrewAnUncaughtException()) {
                 Object returnedObject = runner.app.getReturnedObject();
@@ -107,9 +102,9 @@ public class TestableMuliRunner extends MuliRunner {
                     message = new String(characters);
                 }
 
-                fail("Uncaught exception, no suitable exception handler: "
+                System.err.println("Uncaught exception, no suitable exception handler: "
                         + throwableClassFile.getName().replace("/", ".") + " (" + message + ")");
-
+                assert false;
             }
         }
         LogicVirtualMachine virtualMachine = (LogicVirtualMachine)runner.app.getVirtualMachine();
