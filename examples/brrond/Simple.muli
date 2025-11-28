@@ -1,0 +1,47 @@
+package brrond;
+
+import de.wwu.muli.*;
+import de.wwu.muli.solution.*;
+
+public class Some {
+    int sum;
+}
+
+public class Simple {
+
+    public static void main(String[] args) {
+          Solution<Object> solution = Muli.getOneSolution(Simple::solve);
+
+          // System.out.println("Found " + solutions.length + " solutions");
+          // for (Solution<Object> solution : solutions) {
+              int[] some = (int[])solution.value;
+              System.out.println("The len is: " + some.length);
+              for (int i = 0; i < some.length; i++) {
+                  System.out.print(some[i] + " ");
+              }
+              System.out.println();
+          // }
+      }
+
+    private static int[] solve() {
+        int[] arr free;
+
+        if (arr.length <= 5) {
+            throw Muli.fail();
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < 10) {
+                throw Muli.fail();
+            }
+
+            if (i != 0) {
+                if (arr[i] < arr[i - 1]) {
+                    throw Muli.fail();
+                }
+            }
+        }
+
+        return arr;
+    }
+}
