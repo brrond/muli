@@ -32,28 +32,44 @@ public class Sudoku {
         board.arr = new int[SIZE * SIZE];
         int[] arr free;
 
+        // Ensure size
         if (arr.length != SIZE * SIZE) {
             throw Muli.fail();
         }
 
-        if (arr[0] != 5) {
+        // Initial state
+        if (arr[0] != 2) {
             throw Muli.fail();
         }
 
-        for (int i = 0; i < SIZE * SIZE; i++) {
-            for (int j = i + 1; j < SIZE * SIZE; j++) {
-                if (arr[i] == arr[j]) {
-                    throw Muli.fail();
+        // Iterate over all
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+
+                // Ensure unique in columns
+                for (int k = i + 1; k < SIZE; k++) {
+                    if (arr[i * SIZE + j] == arr[k * SIZE + j]) {
+                        throw Muli.fail();
+                    }
+                }
+
+                // Ensure unique in rows
+                for (int k = j + 1; k < SIZE; k++) {
+                    if (arr[i * SIZE + j] == arr[i * SIZE + k]) {
+                        throw Muli.fail();
+                    }
                 }
             }
         }
 
+        // Ensure value ranges
         for (int i = 0; i < SIZE * SIZE; i++) {
-            if (arr[i] < 1 || arr[i] > 9) {
+            if (arr[i] < 1 || arr[i] > SIZE) {
                 throw Muli.fail();
             }
         }
 
+        // Write result
         for (int i = 0; i < SIZE * SIZE; i++) {
             board.arr[i] = arr[i];
         }
