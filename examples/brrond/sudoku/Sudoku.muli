@@ -1,37 +1,21 @@
 package brrond.sudoku;
 
-import java.io.PrintStream;
-
 import de.wwu.muli.*;
 import de.wwu.muli.solution.*;
 
 public class Sudoku {
     public static int SIZE = 9;
 
-    public static class Board {
-        int[] arr;
-
-        public String toString() {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < arr.length; i++) {
-                stringBuilder.append(arr[i]).append(" ");
-                if ((i + 1) % SIZE == 0) {
-                    stringBuilder.append("\n");
-                }
-            }
-            return stringBuilder.toString();
-        }
-    }
-
     public static void main(String[] args) {
 
         Solution<Object> solution = Muli.getOneSolution(Sudoku::solve);
         Board board = (Board) solution.value;
         System.out.println(board);
+        System.out.println("Solved: " + board.isSolved());
     }
 
     public static Board solve() {
-        Board board = new Board();
+        Board board = new Board(SIZE);
         board.arr = new int[SIZE * SIZE];
         int[] arr free;
 
