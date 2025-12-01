@@ -30,71 +30,66 @@ public class Sudoku {
     public static Board solve() {
         Board board = new Board();
         board.arr = new int[9];
+        int[] arr free;
 
-        int el00 free;
-        int el01 free;
-        int el02 free;
-        int el03 free;
-        int el04 free;
-        int el05 free;
-        int el06 free;
-        int el07 free;
-        int el08 free;
-
-        if (el00 != 5) {
+        if (arr.length != 9) {
             throw Muli.fail();
         }
 
-        if (el00 == el01 || el00 == el02 || el00 == el03 ||
-            el00 == el04 || el00 == el05 || el00 == el06 ||
-            el00 == el07 || el00 == el08) {
+        if (arr[0] != 5) {
             throw Muli.fail();
         }
 
-        if (el01 == el02 || el01 == el03 ||
-            el01 == el04 || el01 == el05 || el01 == el06 ||
-            el01 == el07 || el01 == el08) {
+        for (int i = 1; i < 9; i++) {
+            if (arr[0] == arr[i]) {
+                throw Muli.fail();
+            }
+        }
+
+        if (arr[1] == arr[2] || arr[1] == arr[3] ||
+            arr[1] == arr[4] || arr[1] == arr[5] || arr[1] == arr[6] ||
+            arr[1] == arr[7] || arr[1] == arr[8]) {
             throw Muli.fail();
         }
 
-        if (el02 == el03 ||
-            el02 == el04 || el02 == el05 || el02 == el06 ||
-            el02 == el07 || el02 == el08) {
+        if (arr[2] == arr[3] ||
+            arr[2] == arr[4] || arr[2] == arr[5] || arr[2] == arr[6] ||
+            arr[2] == arr[7] || arr[2] == arr[8]) {
             throw Muli.fail();
         }
 
-        if (el03 == el04 || el03 == el05 || el03 == el06 ||
-            el03 == el07 || el03 == el08) {
+        if (arr[3] == arr[4] || arr[3] == arr[5] || arr[3] == arr[6] ||
+            arr[3] == arr[7] || arr[3] == arr[8]) {
             throw Muli.fail();
         }
 
-        if (el04 == el05 || el04 == el06 ||
-            el04 == el07 || el04 == el08) {
+        if (arr[4] == arr[5] || arr[4] == arr[6] ||
+            arr[4] == arr[7] || arr[4] == arr[8]) {
             throw Muli.fail();
         }
 
-        if (el05 == el06 ||
-            el05 == el07 || el05 == el08) {
+        if (arr[5] == arr[6] ||
+            arr[5] == arr[7] || arr[5] == arr[8]) {
             throw Muli.fail();
         }
 
-        if (el06 == el07 || el06 == el08) {
+        if (arr[6] == arr[7] || arr[6] == arr[8]) {
             throw Muli.fail();
         }
 
-        if (el07 == el08) {
+        if (arr[7] == arr[8]) {
             throw Muli.fail();
         }
 
-        board.arr[0] = el00;
-        board.arr[1] = el01;
-        board.arr[2] = el02;
-        board.arr[3] = el03;
-        board.arr[4] = el04;
-        board.arr[5] = el05;
-        board.arr[6] = el06;
-        board.arr[7] = el07;
-        board.arr[8] = el08;
+        board.arr[0] = arr[0];
+        board.arr[1] = arr[1];
+        board.arr[2] = arr[2];
+        board.arr[3] = arr[3];
+        board.arr[4] = arr[4];
+        board.arr[5] = arr[5];
+        board.arr[6] = arr[6];
+        board.arr[7] = arr[7];
+        board.arr[8] = arr[8];
 
         return board;
     }
