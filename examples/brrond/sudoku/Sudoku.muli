@@ -6,7 +6,7 @@ import de.wwu.muli.*;
 import de.wwu.muli.solution.*;
 
 public class Sudoku {
-    public static int SIZE = 3;
+    public static int SIZE = 9;
 
     public static class Board {
         int[] arr;
@@ -15,6 +15,9 @@ public class Sudoku {
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < arr.length; i++) {
                 stringBuilder.append(arr[i]).append(" ");
+                if ((i + 1) % SIZE == 0) {
+                    stringBuilder.append("\n");
+                }
             }
             return stringBuilder.toString();
         }
@@ -38,7 +41,15 @@ public class Sudoku {
         }
 
         // Initial state
-        if (arr[0] != 2) {
+        if (arr[2] != 8 || arr[4] != 4 || arr[5] != 5 ||
+            arr[10] != 9 || arr[11] != 5 || arr[12] != 3 || arr[16] != 1 ||
+            arr[22] != 8 || arr[24] != 2 || arr[25] != 3 ||
+            arr[27] != 4 || arr[30] != 5 || arr[33] != 6 ||
+            arr[36] != 2 || arr[44] != 7 ||
+            arr[45] != 8 || arr[47] != 3 || arr[49] != 7 || arr[50] != 6 || arr[52] != 4 || arr[53] != 2 ||
+            arr[54] != 9 || arr[56] != 2 || arr[57] != 6 || arr[62] != 4 ||
+            arr[64] != 1 || arr[67] != 3 || arr[69] != 9 ||
+            arr[74] != 7 || arr[78] != 5 || arr[79] != 8) {
             throw Muli.fail();
         }
 
