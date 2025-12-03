@@ -1,0 +1,159 @@
+package brrond.sudoku;
+
+import de.wwu.muli.*;
+import de.wwu.muli.solution.*;
+
+/*
+Initial:
+
+0 0 8 0 4 5 0 0 0
+0 9 5 3 0 0 0 1 0
+0 0 0 0 8 0 2 3 0
+4 0 0 5 0 0 6 0 0
+2 0 0 0 0 0 0 0 7
+8 0 3 0 7 6 0 4 2
+9 0 2 6 0 0 0 0 4
+0 1 0 0 3 0 9 0 0
+0 0 7 0 0 0 5 8 0
+
+Solved:
+
+3 2 8 1 4 5 7 6 9
+7 9 5 3 6 2 4 1 8
+1 4 6 7 8 9 2 3 5
+4 7 1 5 2 8 6 9 3
+2 6 9 4 1 3 8 5 7
+8 5 3 9 7 6 1 4 2
+9 8 2 6 5 1 3 7 4
+5 1 4 8 3 7 9 2 6
+6 3 7 2 9 4 5 8 1
+
+Array
+{
+    {3, 2, 8, 1, 4, 5, 7, 6, 9},
+    {7, 9, 5, 3, 6, 2, 4, 1, 8},
+    {1, 4, 6, 7, 8, 9, 2, 3, 5},
+    {4, 7, 1, 5, 2, 8, 6, 9, 3},
+    {2, 6, 9, 4, 1, 3, 8, 5, 7},
+    {8, 5, 3, 9, 7, 6, 1, 4, 2},
+    {9, 8, 2, 6, 5, 1, 3, 7, 4},
+    {5, 1, 4, 8, 3, 7, 9, 2, 6},
+    {6, 3, 7, 2, 9, 4, 5, 8, 1}
+}
+*/
+
+public class Sudoku {
+    public static int SIZE = 9;
+
+    public static void main(String[] args) {
+
+        Solution<Object> solution = Muli.getOneSolution(Sudoku::solve);
+        Board board = (Board) solution.value;
+        System.out.println(board);
+        System.out.println("Solved: " + board.isSolved());
+    }
+
+    public static Board solve() {
+        Board board = new Board(SIZE);
+        board.arr = new int[SIZE * SIZE];
+        int[] arr free;
+
+        // Ensure size
+        if (arr.length != SIZE * SIZE) {
+            throw Muli.fail();
+        }
+
+        // Initial state
+        if (arr[2] != 8 || arr[4] != 4 || arr[5] != 5 ||
+            arr[10] != 9 || arr[11] != 5 || arr[12] != 3 || arr[16] != 1 ||
+            arr[22] != 8 || arr[24] != 2 || arr[25] != 3 ||
+            arr[27] != 4 || arr[30] != 5 || arr[33] != 6 ||
+            arr[36] != 2 || arr[44] != 7 ||
+            arr[45] != 8 || arr[47] != 3 || arr[49] != 7 || arr[50] != 6 || arr[52] != 4 || arr[53] != 2 ||
+            arr[54] != 9 || arr[56] != 2 || arr[57] != 6 || arr[62] != 4 ||
+            arr[64] != 1 || arr[67] != 3 || arr[69] != 9 ||
+            arr[74] != 7 || arr[78] != 5 || arr[79] != 8) {
+            throw Muli.fail();
+        }
+
+        // Iterate over all
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+
+                // Ensure unique in columns
+                for (int k = i + 1; k < SIZE; k++) {
+                    if (arr[i * SIZE + j] == arr[k * SIZE + j]) {
+                        throw Muli.fail();
+                    }
+                }
+
+                // Ensure unique in rows
+                for (int k = j + 1; k < SIZE; k++) {
+                    if (arr[i * SIZE + j] == arr[i * SIZE + k]) {
+                        throw Muli.fail();
+                    }
+                }
+            }
+        }
+
+        // I2d doesn't work:
+        /*
+        General exception of type java.lang.ClassCastException: java.lang.Integer cannot be cast to de.wwu.muggl.solvers.expressions.Term
+        java.lang.ClassCastException: java.lang.Integer cannot be cast to de.wwu.muggl.solvers.expressions.Term
+        	at de.wwu.muggl.instructions.bytecode.I2d.executeSymbolically(I2d.java:39)
+        	at de.wwu.muggl.instructions.interfaces.Instruction.executeMuli(Instruction.java:37)
+        	at de.wwu.muli.vm.LogicVirtualMachine.executeInstruction(LogicVirtualMachine.java:408)
+        	at de.wwu.muggl.vm.VirtualMachine.executeFrame(VirtualMachine.java:826)
+        	at de.wwu.muggl.vm.VirtualMachine.runMainLoop(VirtualMachine.java:731)
+        	at de.wwu.muli.vm.LogicVirtualMachine.runMainLoop(LogicVirtualMachine.java:371)
+        	at de.wwu.muggl.vm.VirtualMachine.run(VirtualMachine.java:350)
+        */
+        int blockSize = 3;
+        if (blockSize * blockSize == SIZE) {
+
+            // Iterate over all blocks
+            // number of blocks == blockSize
+            for (int i = 0; i < blockSize; i++) {
+                for (int j = 0; j < blockSize; j++) {
+
+                    // Iterate over all elements in one block
+                    for (int k = 0; k < blockSize; k++) {
+                        for (int l = 0; l < blockSize; l++) {
+
+                            // Iterate over all other elements in block
+                            for (int k1 = 0; k1 < blockSize; k1++) {
+                                for (int l1 = 0; l1 < blockSize; l1++) {
+
+                                    // Skip current
+                                    if (k1 == k && l1 == l) {
+                                        continue;
+                                    }
+
+                                    // Ensure the elements
+                                    if (arr[i * SIZE * blockSize + j * blockSize + k * SIZE + l] ==
+                                        arr[i * SIZE * blockSize + j * blockSize + k1 * SIZE + l1]) {
+                                        throw Muli.fail();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Ensure value ranges
+        for (int i = 0; i < SIZE * SIZE; i++) {
+            if (arr[i] < 1 || arr[i] > SIZE) {
+                throw Muli.fail();
+            }
+        }
+
+        // Write result
+        for (int i = 0; i < SIZE * SIZE; i++) {
+            board.arr[i] = arr[i];
+        }
+
+        return board;
+    }
+}
