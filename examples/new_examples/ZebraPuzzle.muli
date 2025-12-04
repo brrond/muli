@@ -25,6 +25,17 @@ import de.wwu.muli.solution.*;
  * 12. The Lucky Strike smoker drinks orange juice
  * 13. The Japanese smokes Parliaments
  * 14. The Norwegian lives next to the blue house
+ * 
+ * Solution:
+ * House    | 1          | 2          | 3          | 4          | 5
+ * ---------|------------|------------|------------|------------|------------
+ * Nation   | Norwegian  | Ukrainian  | Englishman | Spaniard   | Japanese
+ * Color    | Yellow     | Blue       | Red        | Ivory      | Green
+ * Pet      | Fox        | Horse      | Snails     | Dog        | Zebra
+ * Drink    | Water      | Tea        | Milk       | Orange     | Coffee
+ * Smokes   | Kools      | Chesterfields | Old Gold | Lucky Strike | Parliaments
+ * 
+ * Answer: The Japanese owns the zebra, and the Norwegian drinks water.
  */
 public class ZebraPuzzle {
     
