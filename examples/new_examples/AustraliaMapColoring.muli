@@ -1,0 +1,77 @@
+package new_examples;
+
+import de.wwu.muli.*;
+import de.wwu.muli.solution.*;
+
+/*
+ * Australia Map Coloring Problem:
+ * 
+ * Color the map of Australia using only 3 colors (Red, Green, Blue) such that
+ * no two adjacent regions have the same color.
+ * 
+ * Regions: WA, NT, SA, Q, NSW, V, T
+ * (Western Australia, Northern Territory, South Australia, Queensland,
+ *  New South Wales, Victoria, Tasmania)
+ * 
+ * Adjacencies:
+ * - WA borders: NT, SA
+ * - NT borders: WA, SA, Q
+ * - SA borders: WA, NT, Q, NSW, V
+ * - Q borders: NT, SA, NSW
+ * - NSW borders: SA, Q, V
+ * - V borders: SA, NSW
+ * - T borders: (none - it's an island)
+ */
+public class AustraliaMapColoring {
+    
+    public static void main(String[] args) {
+        Solution<Object> solution = Muli.getOneSolution(AustraliaMapColoring::solve);
+        
+        int[] colors = (int[])solution.value;
+        String[] regions = {"WA", "NT", "SA", "Q", "NSW", "V", "T"};
+        String[] colorNames = {"Red", "Green", "Blue"};
+        
+        System.out.println("Australia Map Coloring Solution:");
+        for (int i = 0; i < regions.length; i++) {
+            System.out.println(regions[i] + ": " + colorNames[colors[i]]);
+        }
+    }
+    
+    private static int[] solve() {
+        int RED = 0, GREEN = 1, BLUE = 2;
+        
+        int[] colors = new int[7];
+        
+        // Step 1: Assign free variables with domain [0..2] for each region
+        for (int i = 0; i < 7; i++) {
+            int c free;
+            if (c < 0 || c > 2) {
+                throw Muli.fail();
+            }
+            colors[i] = c;
+        }
+        
+        // Map regions to array indices for readability
+        int wa = colors[0];
+        int nt = colors[1];
+        int sa = colors[2];
+        int q = colors[3];
+        int nsw = colors[4];
+        int v = colors[5];
+        int t = colors[6];
+        
+        // Step 2: Enforce adjacency constraints (adjacent regions must have different colors)
+        if (wa == nt) throw Muli.fail();    // WA-NT border
+        if (wa == sa) throw Muli.fail();    // WA-SA border
+        if (nt == sa) throw Muli.fail();    // NT-SA border
+        if (nt == q) throw Muli.fail();     // NT-Q border
+        if (sa == q) throw Muli.fail();     // SA-Q border
+        if (sa == nsw) throw Muli.fail();   // SA-NSW border
+        if (sa == v) throw Muli.fail();     // SA-V border
+        if (q == nsw) throw Muli.fail();    // Q-NSW border
+        if (nsw == v) throw Muli.fail();    // NSW-V border
+        // Note: Tasmania (t) has no borders, so no constraints
+        
+        return colors;
+    }
+}
