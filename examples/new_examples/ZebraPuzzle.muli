@@ -1,0 +1,184 @@
+package new_examples;
+
+import de.wwu.muli.*;
+import de.wwu.muli.solution.*;
+
+public class ZebraPuzzle {
+    
+    public static void main(String[] args) {
+        Solution<Object> solution = Muli.getOneSolution(ZebraPuzzle::solve);
+        
+        int[] result = (int[])solution.value;
+        System.out.println("Einstein's Riddle Solution:");
+        System.out.println("The " + getColor(result[0]) + " owns the zebra");
+        System.out.println("The " + getColor(result[1]) + " drinks water");
+    }
+    
+    private static String getColor(int i) {
+        String[] colors = {"Norwegian", "Englishman", "Spaniard", "Ukrainian", "Japanese"};
+        return colors[i];
+    }
+    
+    private static int[] solve() {
+        int norwegian = 0, englishman = 1, spaniard = 2, ukrainian = 3, japanese = 4;
+        int red = 0, green = 1, ivory = 2, yellow = 3, blue = 4;
+        int dog = 0, snails = 1, fox = 2, horse = 3, zebra = 4;
+        int coffee = 0, tea = 1, milk = 2, orange = 3, water = 4;
+        int oldGold = 0, kools = 1, chesterfields = 2, luckyStrike = 3, parliaments = 4;
+        
+        int[] nationality = new int[5];
+        int[] color = new int[5];
+        int[] pet = new int[5];
+        int[] drink = new int[5];
+        int[] smoke = new int[5];
+        
+        for (int i = 0; i < 5; i++) {
+            int n free;
+            if (n < 0 || n >= 5) throw Muli.fail();
+            nationality[i] = n;
+            
+            int c free;
+            if (c < 0 || c >= 5) throw Muli.fail();
+            color[i] = c;
+            
+            int p free;
+            if (p < 0 || p >= 5) throw Muli.fail();
+            pet[i] = p;
+            
+            int d free;
+            if (d < 0 || d >= 5) throw Muli.fail();
+            drink[i] = d;
+            
+            int s free;
+            if (s < 0 || s >= 5) throw Muli.fail();
+            smoke[i] = s;
+        }
+        
+        for (int i = 0; i < 5; i++) {
+            for (int j = i + 1; j < 5; j++) {
+                if (nationality[i] == nationality[j]) throw Muli.fail();
+                if (color[i] == color[j]) throw Muli.fail();
+                if (pet[i] == pet[j]) throw Muli.fail();
+                if (drink[i] == drink[j]) throw Muli.fail();
+                if (smoke[i] == smoke[j]) throw Muli.fail();
+            }
+        }
+        
+        if (nationality[0] != norwegian) throw Muli.fail();
+        
+        int engHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (nationality[i] == englishman) {
+                if (color[i] != red) throw Muli.fail();
+                engHouse = i;
+                break;
+            }
+        }
+        
+        int spanHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (nationality[i] == spaniard) {
+                if (pet[i] != dog) throw Muli.fail();
+                spanHouse = i;
+                break;
+            }
+        }
+        
+        int coffeeHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (drink[i] == coffee) {
+                if (color[i] != green) throw Muli.fail();
+                coffeeHouse = i;
+                break;
+            }
+        }
+        
+        int ukrHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (nationality[i] == ukrainian) {
+                if (drink[i] != tea) throw Muli.fail();
+                ukrHouse = i;
+                break;
+            }
+        }
+        
+        int greenHouse = -1, ivoryHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (color[i] == green) greenHouse = i;
+            if (color[i] == ivory) ivoryHouse = i;
+        }
+        if (greenHouse != ivoryHouse + 1) throw Muli.fail();
+        
+        int oldGoldHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (smoke[i] == oldGold) {
+                if (pet[i] != snails) throw Muli.fail();
+                oldGoldHouse = i;
+                break;
+            }
+        }
+        
+        int koolsHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (smoke[i] == kools) {
+                if (color[i] != yellow) throw Muli.fail();
+                koolsHouse = i;
+                break;
+            }
+        }
+        
+        if (drink[2] != milk) throw Muli.fail();
+        
+        int chesterHouse = -1, foxHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (smoke[i] == chesterfields) chesterHouse = i;
+            if (pet[i] == fox) foxHouse = i;
+        }
+        int diff1 = chesterHouse - foxHouse;
+        if (diff1 != 1 && diff1 != -1) throw Muli.fail();
+        
+        int horseHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (pet[i] == horse) horseHouse = i;
+        }
+        int diff2 = koolsHouse - horseHouse;
+        if (diff2 != 1 && diff2 != -1) throw Muli.fail();
+        
+        int luckyHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (smoke[i] == luckyStrike) {
+                if (drink[i] != orange) throw Muli.fail();
+                luckyHouse = i;
+                break;
+            }
+        }
+        
+        int japHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (nationality[i] == japanese) {
+                if (smoke[i] != parliaments) throw Muli.fail();
+                japHouse = i;
+                break;
+            }
+        }
+        
+        int blueHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (color[i] == blue) blueHouse = i;
+        }
+        int diff3 = 0 - blueHouse;
+        if (diff3 != 1 && diff3 != -1) throw Muli.fail();
+        
+        int zebraHouse = -1, waterHouse = -1;
+        for (int i = 0; i < 5; i++) {
+            if (pet[i] == zebra) zebraHouse = i;
+            if (drink[i] == water) waterHouse = i;
+        }
+        
+        int[] result = new int[2];
+        result[0] = nationality[zebraHouse];
+        result[1] = nationality[waterHouse];
+        
+        return result;
+    }
+}
