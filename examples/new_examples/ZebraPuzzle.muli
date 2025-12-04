@@ -3,6 +3,29 @@ package new_examples;
 import de.wwu.muli.*;
 import de.wwu.muli.solution.*;
 
+/*
+ * Einstein's Riddle (Zebra Puzzle):
+ * 
+ * There are 5 houses in a row, each with a different color, owner nationality,
+ * pet, drink, and cigarette brand. Using the clues below, determine who owns
+ * the zebra and who drinks water.
+ * 
+ * Clues:
+ * 1. The Norwegian lives in the first house
+ * 2. The Englishman lives in the red house
+ * 3. The Spaniard owns the dog
+ * 4. Coffee is drunk in the green house
+ * 5. The Ukrainian drinks tea
+ * 6. The green house is immediately to the right of the ivory house
+ * 7. The Old Gold smoker owns snails
+ * 8. Kools are smoked in the yellow house
+ * 9. Milk is drunk in the middle house
+ * 10. The Chesterfields smoker lives next to the fox owner
+ * 11. Kools are smoked in the house next to the house with the horse
+ * 12. The Lucky Strike smoker drinks orange juice
+ * 13. The Japanese smokes Parliaments
+ * 14. The Norwegian lives next to the blue house
+ */
 public class ZebraPuzzle {
     
     public static void main(String[] args) {
@@ -20,18 +43,21 @@ public class ZebraPuzzle {
     }
     
     private static int[] solve() {
+        // Define constants for all attributes
         int norwegian = 0, englishman = 1, spaniard = 2, ukrainian = 3, japanese = 4;
         int red = 0, green = 1, ivory = 2, yellow = 3, blue = 4;
         int dog = 0, snails = 1, fox = 2, horse = 3, zebra = 4;
         int coffee = 0, tea = 1, milk = 2, orange = 3, water = 4;
         int oldGold = 0, kools = 1, chesterfields = 2, luckyStrike = 3, parliaments = 4;
         
+        // Create arrays representing each house's attributes
         int[] nationality = new int[5];
         int[] color = new int[5];
         int[] pet = new int[5];
         int[] drink = new int[5];
         int[] smoke = new int[5];
         
+        // Step 1: Initialize free variables for each house and attribute
         for (int i = 0; i < 5; i++) {
             int n free;
             if (n < 0 || n >= 5) throw Muli.fail();
@@ -54,6 +80,7 @@ public class ZebraPuzzle {
             smoke[i] = s;
         }
         
+        // Step 2: Enforce all-different constraints (each attribute appears exactly once)
         for (int i = 0; i < 5; i++) {
             for (int j = i + 1; j < 5; j++) {
                 if (nationality[i] == nationality[j]) throw Muli.fail();
@@ -64,8 +91,10 @@ public class ZebraPuzzle {
             }
         }
         
+        // Clue 1: The Norwegian lives in the first house
         if (nationality[0] != norwegian) throw Muli.fail();
         
+        // Clue 2: The Englishman lives in the red house
         int engHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (nationality[i] == englishman) {
@@ -75,6 +104,7 @@ public class ZebraPuzzle {
             }
         }
         
+        // Clue 3: The Spaniard owns the dog
         int spanHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (nationality[i] == spaniard) {
@@ -84,6 +114,7 @@ public class ZebraPuzzle {
             }
         }
         
+        // Clue 4: Coffee is drunk in the green house
         int coffeeHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (drink[i] == coffee) {
@@ -93,6 +124,7 @@ public class ZebraPuzzle {
             }
         }
         
+        // Clue 5: The Ukrainian drinks tea
         int ukrHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (nationality[i] == ukrainian) {
@@ -102,6 +134,7 @@ public class ZebraPuzzle {
             }
         }
         
+        // Clue 6: The green house is immediately to the right of the ivory house
         int greenHouse = -1, ivoryHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (color[i] == green) greenHouse = i;
@@ -109,6 +142,7 @@ public class ZebraPuzzle {
         }
         if (greenHouse != ivoryHouse + 1) throw Muli.fail();
         
+        // Clue 7: The Old Gold smoker owns snails
         int oldGoldHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (smoke[i] == oldGold) {
@@ -118,6 +152,7 @@ public class ZebraPuzzle {
             }
         }
         
+        // Clue 8: Kools are smoked in the yellow house
         int koolsHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (smoke[i] == kools) {
@@ -127,8 +162,10 @@ public class ZebraPuzzle {
             }
         }
         
+        // Clue 9: Milk is drunk in the middle house
         if (drink[2] != milk) throw Muli.fail();
         
+        // Clue 10: The Chesterfields smoker lives next to the fox owner
         int chesterHouse = -1, foxHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (smoke[i] == chesterfields) chesterHouse = i;
@@ -137,6 +174,7 @@ public class ZebraPuzzle {
         int diff1 = chesterHouse - foxHouse;
         if (diff1 != 1 && diff1 != -1) throw Muli.fail();
         
+        // Clue 11: Kools are smoked in the house next to the house with the horse
         int horseHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (pet[i] == horse) horseHouse = i;
@@ -144,6 +182,7 @@ public class ZebraPuzzle {
         int diff2 = koolsHouse - horseHouse;
         if (diff2 != 1 && diff2 != -1) throw Muli.fail();
         
+        // Clue 12: The Lucky Strike smoker drinks orange juice
         int luckyHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (smoke[i] == luckyStrike) {
@@ -153,6 +192,7 @@ public class ZebraPuzzle {
             }
         }
         
+        // Clue 13: The Japanese smokes Parliaments
         int japHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (nationality[i] == japanese) {
@@ -162,6 +202,7 @@ public class ZebraPuzzle {
             }
         }
         
+        // Clue 14: The Norwegian lives next to the blue house
         int blueHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (color[i] == blue) blueHouse = i;
@@ -169,6 +210,7 @@ public class ZebraPuzzle {
         int diff3 = 0 - blueHouse;
         if (diff3 != 1 && diff3 != -1) throw Muli.fail();
         
+        // Find the zebra owner and water drinker
         int zebraHouse = -1, waterHouse = -1;
         for (int i = 0; i < 5; i++) {
             if (pet[i] == zebra) zebraHouse = i;

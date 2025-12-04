@@ -3,6 +3,24 @@ package new_examples;
 import de.wwu.muli.*;
 import de.wwu.muli.solution.*;
 
+/*
+ * DONALD + GERALD = ROBERT Cryptarithmetic Puzzle:
+ * 
+ * Each letter represents a unique digit (0-9).
+ * Find digit assignments such that the arithmetic equation holds:
+ * 
+ *   DONALD
+ * + GERALD
+ * --------
+ *  ROBERT
+ * 
+ * Constraints:
+ * - Each letter maps to a unique digit (0-9)
+ * - Leading digits (D, G, R) cannot be 0
+ * - The arithmetic equation must be satisfied
+ * 
+ * Letters: D, O, N, A, L, G, E, R, B, T (10 unique letters for 10 digits)
+ */
 public class DonaldGerald {
     
     public static void main(String[] args) {
@@ -27,6 +45,7 @@ public class DonaldGerald {
     private static int[] solve() {
         int[] digits = new int[10];
         
+        // Step 1: Create free variables for each digit with domain [0..9]
         for (int i = 0; i < 10; i++) {
             int val free;
             if (val < 0 || val > 9) {
@@ -35,6 +54,7 @@ public class DonaldGerald {
             digits[i] = val;
         }
         
+        // Step 2: Enforce all-different constraint (each letter has unique digit)
         for (int i = 0; i < 10; i++) {
             for (int j = i + 1; j < 10; j++) {
                 if (digits[i] == digits[j]) {
@@ -43,6 +63,7 @@ public class DonaldGerald {
             }
         }
         
+        // Map indices to letter names for clarity
         int d = digits[0];
         int o = digits[1];
         int n = digits[2];
@@ -54,14 +75,17 @@ public class DonaldGerald {
         int b = digits[8];
         int t = digits[9];
         
-        if (d == 0) throw Muli.fail();
-        if (g == 0) throw Muli.fail();
-        if (r == 0) throw Muli.fail();
+        // Step 3: Leading digits cannot be zero
+        if (d == 0) throw Muli.fail();  // DONALD starts with D
+        if (g == 0) throw Muli.fail();  // GERALD starts with G
+        if (r == 0) throw Muli.fail();  // ROBERT starts with R
         
+        // Step 4: Compute numeric values for each word
         int donald = d * 100000 + o * 10000 + n * 1000 + a * 100 + l * 10 + d;
         int gerald = g * 100000 + e * 10000 + r * 1000 + a * 100 + l * 10 + d;
         int robert = r * 100000 + o * 10000 + b * 1000 + e * 100 + r * 10 + t;
         
+        // Step 5: Enforce the arithmetic constraint: DONALD + GERALD = ROBERT
         if (donald + gerald != robert) {
             throw Muli.fail();
         }
