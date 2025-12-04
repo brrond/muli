@@ -1,0 +1,54 @@
+package new_examples;
+
+import de.wwu.muli.*;
+import de.wwu.muli.solution.*;
+
+public class AustraliaMapColoring {
+    
+    public static void main(String[] args) {
+        Solution<Object> solution = Muli.getOneSolution(AustraliaMapColoring::solve);
+        
+        int[] colors = (int[])solution.value;
+        String[] regions = {"WA", "NT", "SA", "Q", "NSW", "V", "T"};
+        String[] colorNames = {"Red", "Green", "Blue"};
+        
+        System.out.println("Australia Map Coloring Solution:");
+        for (int i = 0; i < regions.length; i++) {
+            System.out.println(regions[i] + ": " + colorNames[colors[i]]);
+        }
+    }
+    
+    private static int[] solve() {
+        int RED = 0, GREEN = 1, BLUE = 2;
+        
+        int[] colors = new int[7];
+        
+        for (int i = 0; i < 7; i++) {
+            int c free;
+            if (c < 0 || c > 2) {
+                throw Muli.fail();
+            }
+            colors[i] = c;
+        }
+        
+        int wa = colors[0];
+        int nt = colors[1];
+        int sa = colors[2];
+        int q = colors[3];
+        int nsw = colors[4];
+        int v = colors[5];
+        int t = colors[6];
+        
+        if (wa == nt) throw Muli.fail();
+        if (wa == sa) throw Muli.fail();
+        if (nt == sa) throw Muli.fail();
+        if (nt == q) throw Muli.fail();
+        if (sa == q) throw Muli.fail();
+        if (sa == nsw) throw Muli.fail();
+        if (sa == v) throw Muli.fail();
+        if (q == nsw) throw Muli.fail();
+        if (nsw == v) throw Muli.fail();
+        
+        return colors;
+    }
+}
