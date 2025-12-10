@@ -1,20 +1,26 @@
-# Muggl
+# Muggl-for-Muli
 
-## Some notes for the developer
+Forked and adapted version of [Muggl](https://github.com/wwu-pi/muggl) (Muenster Generator of Glass-box Test Cases) for Muli.
 
-**General remark**: The build system of Muggl was recently switched to Gradle, which is now managing dependencies as well as the actual build. If you experience any problems with that, please let the developers know!
+## What is Muggl?
 
-In order to **run** the system:
-- Install a JDK (tested exhaustively with OpenJDK 6, but OpenJDK 8 seems to work as well)
-- In the root directory that you cloned, enter `./gradlew run`. Muggl is then compiled and started.
+Muggl is a symbolic execution engine for Java bytecode. It executes programs symbolically, tracking constraints rather than concrete values, enabling:
+- Path exploration with backtracking
+- Constraint collection for solver-based execution
+- Test case generation
 
-In order to **generate an eclipse project** for development and execution:
-- In the root directory that you cloned, enter `./gradlew eclipse`. Metadata for all project is generated in accordance with the settings of the build script.
-- Check that the `conf` folder is in the `muggl-swt` directory.
+## Muli Integration
 
-In order to create a **deployable jar** file:
-- (todo)
+Muli uses Muggl as its execution backend:
+- **muggl-core**: Bytecode interpreter with symbolic execution
+- **muggl-common**: Shared utilities
+- **muggl-solvers**: Constraint solver interfaces
+- **muggl-solver-jacop**: JaCoP solver binding
+- **muggl-solver-muconst**: Custom Muli constraint solver
+- **muggl-solver-z3**: Z3 SMT solver binding
 
-### Builds
-[![Build Status](https://travis-ci.org/wwu-pi/muggl.svg?branch=master)](https://travis-ci.org/wwu-pi/muggl) 
-[![codecov](https://codecov.io/gh/wwu-pi/muggl/branch/master/graph/badge.svg)](https://codecov.io/gh/wwu-pi/muggl)
+## Structure
+
+This is a standalone Muggl repository adapted for Muli. The main integration point is through `muli-env` which uses these Muggl components.
+
+**Note**: For Muli development, work in `muli-env` subprojects which contain the integrated Muggl modules.
