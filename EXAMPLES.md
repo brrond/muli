@@ -48,7 +48,7 @@ Muli adds features like:
 
 ## Running Examples
 
-### Method 1: Using Gradle (Recommended)
+### Using Gradle
 
 ```bash
 cd muli-env
@@ -56,32 +56,6 @@ cd muli-env
 ```
 
 Replace `brrond.HelloWorld` with your class's fully-qualified name.
-
-### Method 2: Using Distribution
-
-```bash
-# Build distribution first
-make muli-env.zip
-unzip muli-env.zip
-
-# Run
-muli-env-*/bin/muli-runtime brrond.HelloWorld
-```
-
-### Method 3: Run Tests
-
-Many examples have corresponding test classes:
-
-```bash
-cd muli-env
-./gradlew test --tests "brrond.HelloWorldTest"
-./gradlew test --tests "brrond.sudoku.SudokuTest"
-```
-
-View all tests:
-```bash
-find muli-env/muli-runtime/src/test/java -name "*Test.java"
-```
 
 ## Creating New Examples
 
@@ -119,41 +93,11 @@ cd muli-env
 ./gradlew run -Dexec.args="mypackage.MyExample"
 ```
 
-### 4. Add Test (Optional)
-
-Create test in `muli-env/muli-runtime/src/test/java/`:
-
-```java
-package mypackage;
-
-import org.junit.Test;
-
-public class MyExampleTest {
-    @Test
-    public void testExample() {
-        MyExample.main(new String[]{});
-    }
-}
-```
-
-Run:
-```bash
-./gradlew test --tests "mypackage.MyExampleTest"
-```
-
 ## Example Walkthrough: Sudoku
 
 **Location**: `examples/brrond/sudoku/`
 
-**Test**: `muli-env/muli-runtime/src/test/java/brrond/sudoku/SudokuTest.java`
-
-**Run**:
-```bash
-cd muli-env
-./gradlew test --tests "brrond.sudoku.SudokuTest"
-```
-
-The test demonstrates:
+Demonstrates:
 - Constraint-based puzzle solving
 - Backtracking search
 - Solution finding
@@ -171,8 +115,8 @@ Edit `muli-env/muli-runtime/src/main/resources/log4j.properties` or pass JVM arg
 ### Run in IDE
 
 1. Import project in IntelliJ IDEA
-2. Navigate to test class
-3. Right-click → Run/Debug Test
+2. Navigate to example class
+3. Right-click on main method → Run
 4. Set breakpoints as needed
 
 ## Common Issues
@@ -186,4 +130,4 @@ Edit `muli-env/muli-runtime/src/main/resources/log4j.properties` or pass JVM arg
 Explore more in:
 - `examples/new_examples/`: Recent examples (MagicSquare, ZebraPuzzle, etc.)
 - `examples/sac19/`, `examples/sac22_mulib_benchmark/`: Research benchmarks
-- `muli-env/muli-runtime/src/test/java/de/wwu/muli/`: Core test suite
+- `muli-env/muli-runtime/src/test/java/`: Test examples (may require additional setup)

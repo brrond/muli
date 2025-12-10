@@ -21,9 +21,6 @@ make install-dev
 # Run an example
 cd muli-env
 ./gradlew run -Dexec.args="brrond.HelloWorld"
-
-# Run tests
-./gradlew test --tests "brrond.HelloWorldTest"
 ```
 
 ## Documentation
@@ -98,8 +95,6 @@ Three constraint solvers are integrated:
 - Git
 - Make (for build automation)
 
-**Note**: Muli requires JDK 8. Using newer Java versions may cause build failures.
-
 ## Compilation
 
 ### Quick Start
@@ -128,40 +123,12 @@ make install-dev  # Install dependencies
    make dist
    ```
 
-### Manual Build
-
-**Compiler (muli-lang)**:
-```bash
-cd muli-lang
-./gradlew jar
-# Output: muli-lang/muli-lang-*.jar
-```
-
-**Runtime (muli-env)**:
-```bash
-cd muli-env
-./gradlew distZip
-# Output: muli-env/muli-runtime/build/distributions/muli-runtime-*.zip
-```
-
 ## Running Examples
 
 ### Using Runtime Directly
 ```bash
 cd muli-env
 ./gradlew run -Dexec.args="brrond.HelloWorld"
-```
-
-### Using Distribution
-```bash
-# After building muli-env.zip and extracting it:
-muli-env-*/bin/muli-runtime brrond.HelloWorld
-```
-
-### Test Suite
-```bash
-cd muli-env
-./gradlew test
 ```
 
 ## Development Workflow
@@ -172,9 +139,8 @@ cd muli-env
 2. **Gradle Sync**: IntelliJ auto-imports Gradle projects
 3. **Run Configurations**:
    - **Runtime**: Create Gradle run config for `muli-env:run` with arguments in VM options: `-Dexec.args="your.ClassName"`
-   - **Tests**: Right-click test classes/methods → Run
 4. **Compiler Development**: Work in `muli-lang` module, run `jar` task to rebuild
-5. **Runtime Development**: Work in `muli-env/muli-runtime`, tests in `src/test/java`
+5. **Runtime Development**: Work in `muli-env/muli-runtime`
 
 ### Console
 
@@ -188,12 +154,6 @@ java -jar muli-lang-*.jar ../examples/yourfile.muli
 # 3. Run with runtime:
 cd muli-env
 ./gradlew run -Dexec.args="your.ClassName"
-
-# 4. Run tests:
-./gradlew test
-
-# 5. Quick iteration (runtime only):
-cd muli-env && ./gradlew test --tests "YourTest"
 ```
 
 **Rebuild everything**:
@@ -201,18 +161,4 @@ cd muli-env && ./gradlew test --tests "YourTest"
 make clean  # if defined
 make install-dev
 ```
-
-## Troubleshooting
-
-**Java version errors**: Ensure you're using JDK 8. Check with `java -version` and `javac -version`
-
-**Submodule not initialized**: Run `git submodule update --init --recursive`
-
-**Gradle build fails**: Try `./gradlew clean` then rebuild
-
-**Class not found at runtime**: Ensure classpath includes compiled `.class` files
-
-**Test failures**: Some tests may require specific solver libraries (Z3, JaCoP) to be installed
-
-For more help, see individual component READMEs and [ARCHITECTURE.md](ARCHITECTURE.md).
 
