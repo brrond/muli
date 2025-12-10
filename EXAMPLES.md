@@ -1,6 +1,15 @@
 # Muli Examples
 
-This document explains how to write, compile, and run Muli programs.
+Guide to writing, compiling, and running Muli programs.
+
+## Table of Contents
+
+- [Example Structure](#example-structure)
+- [Writing Muli Programs](#writing-muli-programs)
+- [Running Examples](#running-examples)
+- [Creating New Examples](#creating-new-examples)
+- [Example Walkthrough: Sudoku](#example-walkthrough-sudoku)
+- [Debugging Examples](#debugging-examples)
 
 ## Example Structure
 

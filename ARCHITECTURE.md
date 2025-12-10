@@ -1,6 +1,18 @@
 # Muli Architecture
 
-This document provides technical details about Muli's architecture and components.
+Technical details about Muli's architecture and components.
+
+## Table of Contents
+
+- [High-Level Overview](#high-level-overview)
+- [Component Breakdown](#component-breakdown)
+  - [muli-lang (Compiler)](#1-muli-lang-compiler)
+  - [muli-env (Runtime)](#2-muli-env-runtime-environment)
+  - [muli-classpath](#3-muli-classpath)
+- [Execution Flow](#execution-flow)
+- [Search Strategies](#search-strategies)
+- [Configuration](#configuration)
+- [Extension Points](#extension-points)
 
 ## High-Level Overview
 

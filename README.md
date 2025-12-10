@@ -10,6 +10,22 @@ Fork from: [muli](https://github.com/wwu-pi/muli).
 
 All the muli-subproject (git submodules) were merged into this one monorepo.
 
+## Quick Start
+
+```bash
+# Clone and setup
+git clone https://github.com/brrond/muli.git
+cd muli
+make install-dev
+
+# Run an example
+cd muli-env
+./gradlew run -Dexec.args="brrond.HelloWorld"
+
+# Run tests
+./gradlew test --tests "brrond.HelloWorldTest"
+```
+
 ## Documentation
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)**: Deep dive into system architecture and components
@@ -78,9 +94,11 @@ Three constraint solvers are integrated:
 
 ## Requirements
 
-- JDK 8 (OpenJDK 1.8.0 or equivalent)
+- **JDK 8** (OpenJDK 1.8.0 or equivalent) - **Required**, newer versions may cause issues
 - Git
 - Make (for build automation)
+
+**Note**: Muli requires JDK 8. Using newer Java versions may cause build failures.
 
 ## Compilation
 
@@ -183,4 +201,18 @@ cd muli-env && ./gradlew test --tests "YourTest"
 make clean  # if defined
 make install-dev
 ```
+
+## Troubleshooting
+
+**Java version errors**: Ensure you're using JDK 8. Check with `java -version` and `javac -version`
+
+**Submodule not initialized**: Run `git submodule update --init --recursive`
+
+**Gradle build fails**: Try `./gradlew clean` then rebuild
+
+**Class not found at runtime**: Ensure classpath includes compiled `.class` files
+
+**Test failures**: Some tests may require specific solver libraries (Z3, JaCoP) to be installed
+
+For more help, see individual component READMEs and [ARCHITECTURE.md](ARCHITECTURE.md).
 
