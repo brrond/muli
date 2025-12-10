@@ -15,4 +15,11 @@ public class SudokuTest {
         ST[] foundTrees = TestableMuliRunner.runApplication("brrond.sudoku.Sudoku");
         TestablePrintStreamWrapper.outputStream().resetBuffer(); // To reset output stream
     }
+
+    @Test
+    public final void testSudokuTester() throws InterruptedException, ClassFileException {
+        Options.getInst().actualCliPrinting = true;
+        ST[] foundTrees = TestableMuliRunner.runApplication("brrond.sudoku.SudokuTester");
+        TestablePrintStreamWrapper.outputStream().resetBuffer(); // To reset output stream
+    }
 }
