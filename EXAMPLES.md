@@ -130,4 +130,4 @@ Edit `muli-env/muli-runtime/src/main/resources/log4j.properties` or pass JVM arg
 Explore more in:
 - `examples/new_examples/`: Recent examples (MagicSquare, ZebraPuzzle, etc.)
 - `examples/sac19/`, `examples/sac22_mulib_benchmark/`: Research benchmarks
-- `muli-env/muli-runtime/src/test/java/`: Test examples (may require additional setup)
+- `muli-env/muli-runtime/src/test/java/`: Test examples
