@@ -3,9 +3,9 @@ package de.wwu.muggl.instructions.general;
 import java.util.Stack;
 
 import de.wwu.muggl.vm.Frame;
+import de.wwu.muggl.vm.SearchingVM;
 import de.wwu.muggl.vm.classfile.ClassFile;
 import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
-import de.wwu.muggl.vm.impl.symbolic.SymbolicVirtualMachine;
 import de.wwu.muggl.solvers.expressions.DoubleConstant;
 import de.wwu.muggl.solvers.expressions.IntConstant;
 import de.wwu.muggl.solvers.expressions.Term;
@@ -81,7 +81,7 @@ public abstract class CompareDouble extends CompareFp {
 				 * Create the ConstraintExpression and generate a new ChoicePoint. It will set the
 				 * pc.
 				 */
-				((SymbolicVirtualMachine) frame.getVm()).generateNewChoicePoint(this,
+				((SearchingVM) frame.getVm()).generateNewChoicePoint(this,
 						pushMinusOneForNaN(), term1, term2);
 			}
 		} catch (SymbolicExecutionException e) {

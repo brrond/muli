@@ -5,8 +5,8 @@ import java.util.Stack;
 import de.wwu.muggl.instructions.general.CompareLong;
 import de.wwu.muggl.instructions.interfaces.Instruction;
 import de.wwu.muggl.vm.Frame;
+import de.wwu.muggl.vm.SearchingVM;
 import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
-import de.wwu.muggl.vm.impl.symbolic.SymbolicVirtualMachine;
 import de.wwu.muggl.solvers.expressions.IntConstant;
 import de.wwu.muggl.solvers.expressions.LongConstant;
 import de.wwu.muggl.solvers.expressions.Term;
@@ -69,7 +69,7 @@ public class LCmp extends CompareLong implements Instruction {
 			/*
 			 * Create the ConstraintExpression and generate a new ChoicePoint. It will set the pc.
 			 */
-			((SymbolicVirtualMachine) frame.getVm()).generateNewChoicePoint(this, term1, term2);
+			((SearchingVM) frame.getVm()).generateNewChoicePoint(this, term1, term2);
 			}
 		} catch (SymbolicExecutionException e) {
 			symbolicExecutionFailedWithAnExecutionException(e);

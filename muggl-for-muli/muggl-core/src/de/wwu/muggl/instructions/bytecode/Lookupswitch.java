@@ -4,10 +4,10 @@ import de.wwu.muggl.instructions.InvalidInstructionInitialisationException;
 import de.wwu.muggl.instructions.general.Switch;
 import de.wwu.muggl.instructions.interfaces.Instruction;
 import de.wwu.muggl.vm.Frame;
+import de.wwu.muggl.vm.SearchingVM;
 import de.wwu.muggl.vm.classfile.structures.attributes.AttributeCode;
 import de.wwu.muggl.vm.classfile.structures.attributes.NoMoreCodeBytesException;
 import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
-import de.wwu.muggl.vm.impl.symbolic.SymbolicVirtualMachine;
 import de.wwu.muggl.solvers.expressions.IntConstant;
 import de.wwu.muggl.solvers.expressions.Term;
 
@@ -104,7 +104,7 @@ public class Lookupswitch extends Switch implements Instruction {
 			}
 
 			// Create a choice point.
-			((SymbolicVirtualMachine) frame.getVm()).generateNewChoicePoint(this, key, keys, pcs, null, null);
+			((SearchingVM) frame.getVm()).generateNewChoicePoint(this, key, keys, pcs, null, null);
 		}
 	}
 

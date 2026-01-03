@@ -8,6 +8,7 @@ import de.wwu.muggl.instructions.interfaces.data.StackPop;
 import de.wwu.muggl.solvers.expressions.Expression;
 import de.wwu.muggl.solvers.expressions.NumericConstant;
 import de.wwu.muggl.vm.Frame;
+import de.wwu.muggl.vm.SearchingVM;
 import de.wwu.muggl.vm.classfile.ClassFile;
 import de.wwu.muggl.vm.classfile.ClassFileException;
 import de.wwu.muggl.vm.classfile.structures.attributes.AttributeCode;
@@ -16,7 +17,6 @@ import de.wwu.muggl.vm.exceptions.NoExceptionHandlerFoundException;
 import de.wwu.muggl.vm.exceptions.VmRuntimeException;
 import de.wwu.muggl.vm.execution.ExecutionException;
 import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
-import de.wwu.muggl.vm.impl.symbolic.SymbolicVirtualMachine;
 import de.wwu.muggl.vm.impl.symbolic.exceptions.SymbolicExceptionHandler;
 import de.wwu.muggl.vm.initialization.Arrayref;
 import de.wwu.muggl.vm.initialization.InitializedClass;
@@ -192,7 +192,7 @@ public class Newarray extends de.wwu.muggl.instructions.general.ObjectInitializa
 				}
 			} else {
 				// Create a choice point and push arrays of various length as it is done when loading arrays.
-				((SymbolicVirtualMachine) frame.getVm()).generateNewChoicePoint(this, null, representedType);
+				((SearchingVM) frame.getVm()).generateNewChoicePoint(this, null, representedType);
 			}
 		} catch (VmRuntimeException e) {
 			SymbolicExceptionHandler handler = new SymbolicExceptionHandler(frame, e);

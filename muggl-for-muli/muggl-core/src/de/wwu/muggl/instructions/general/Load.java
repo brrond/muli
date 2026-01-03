@@ -9,6 +9,7 @@ import de.wwu.muggl.instructions.typed.TypedInstruction;
 import de.wwu.muggl.symbolic.generating.Generator;
 import de.wwu.muggl.symbolic.generating.GeneratorProvider;
 import de.wwu.muggl.vm.Frame;
+import de.wwu.muggl.vm.SearchingVM;
 import de.wwu.muggl.vm.classfile.structures.Method;
 import de.wwu.muggl.vm.classfile.structures.attributes.AttributeCode;
 import de.wwu.muggl.vm.exceptions.NoExceptionHandlerFoundException;
@@ -16,7 +17,6 @@ import de.wwu.muggl.vm.execution.ConversionException;
 import de.wwu.muggl.vm.execution.ExecutionException;
 import de.wwu.muggl.vm.execution.MugglToJavaConversion;
 import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
-import de.wwu.muggl.vm.impl.symbolic.SymbolicVirtualMachine;
 import de.wwu.muggl.vm.initialization.ModifieableArrayref;
 import de.wwu.muggl.solvers.expressions.Variable;
 
@@ -143,7 +143,7 @@ public abstract class Load extends GeneralInstructionWithOtherBytes implements L
 						// Check if the generator allows a GeneratorChoicePoint to be created.
 						if (generator.allowsChoicePoint()) {
 							// Generate a GeneratorChoicePoint.
-							((SymbolicVirtualMachine) frame.getVm()).generateNewChoicePoint(this, generator, null);
+							((SearchingVM) frame.getVm()).generateNewChoicePoint(this, generator, null);
 						} else {
 							// Simply provide a value.
 							if (generator.hasAnotherObject())  {
@@ -178,7 +178,7 @@ public abstract class Load extends GeneralInstructionWithOtherBytes implements L
 						}
 
 						// Generate an ArrayInitializationChoicePoint.
-						((SymbolicVirtualMachine) frame.getVm()).generateNewChoicePoint(this, null, null);
+						((SearchingVM) frame.getVm()).generateNewChoicePoint(this, null, null);
 						
 						if (localVariables[localVariable] == null) {
 							frame.getMethod().setGeneratedValue(localVariable, null);
