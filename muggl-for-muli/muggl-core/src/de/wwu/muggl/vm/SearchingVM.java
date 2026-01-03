@@ -60,6 +60,29 @@ public abstract class SearchingVM extends VirtualMachine {
 			ConstraintExpression constraintExpression)
 			throws SymbolicExecutionException;
 
+	/**
+	 * Generate a new choice point for LCmp instruction.
+	 *
+	 * @param instruction The LCmp instruction generating the choice point.
+	 * @param leftTerm The left term of the comparison.
+	 * @param rightTerm The right term of the comparison.
+	 * @throws ExecutionException If an exception is thrown during choice point generation.
+	 */
+	public abstract void generateNewChoicePoint(de.wwu.muggl.instructions.bytecode.LCmp instruction,
+			Term leftTerm, Term rightTerm) throws ExecutionException;
+
+	/**
+	 * Generate a new choice point for CompareFp instruction.
+	 *
+	 * @param instruction The CompareFp instruction generating the choice point.
+	 * @param less If true, behaves like dcmpl/fcmpl; otherwise like dcmpg/fcmpg.
+	 * @param leftTerm The left term of the comparison.
+	 * @param rightTerm The right term of the comparison.
+	 * @throws ExecutionException If an exception is thrown during choice point generation.
+	 */
+	public abstract void generateNewChoicePoint(de.wwu.muggl.instructions.general.CompareFp instruction,
+			boolean less, Term leftTerm, Term rightTerm) throws ExecutionException;
+
     public abstract void generateNewChoicePoint(Switch instruction, Term termFromStack, IntConstant[] keys,
                                        int[] pcs, IntConstant low, IntConstant high) throws ExecutionException;
 
