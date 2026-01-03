@@ -61,6 +61,18 @@ public abstract class SearchingVM extends VirtualMachine {
 			throws SymbolicExecutionException;
 
 	/**
+	 * Generate a new choice point for Load and Newarray instructions.
+	 *
+	 * @param instruction The instruction that wants to generate the choice points.
+	 * @param generator A variable Generator. May be null to indicate no custom variable generator is used.
+	 * @param type A String representation of the type.
+	 * @throws ExecutionException If an Exception is thrown during the choice point generation.
+	 */
+	public abstract void generateNewChoicePoint(GeneralInstructionWithOtherBytes instruction,
+			de.wwu.muggl.symbolic.generating.Generator generator, String type)
+			throws ExecutionException;
+
+	/**
 	 * Generate a new choice point for LCmp instruction.
 	 *
 	 * @param instruction The LCmp instruction generating the choice point.
