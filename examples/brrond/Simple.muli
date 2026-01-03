@@ -14,34 +14,31 @@ public class Simple {
 
           // System.out.println("Found " + solutions.length + " solutions");
           // for (Solution<Object> solution : solutions) {
-              int[] some = (int[])solution.value;
-              System.out.println("The len is: " + some.length);
+              float[] some = (float[])solution.value;
+              System.out.println("Len: " + some.length);
               for (int i = 0; i < some.length; i++) {
-                  System.out.print(some[i] + " ");
+                System.out.println(some[i] + " ");
               }
-              System.out.println();
+              // System.out.println(some);
           // }
       }
 
-    private static int[] solve() {
-        int[] arr free;
+    private static float[] solve() {
+        float[] solution free;
 
-        if (arr.length <= 5) {
+        float a = 1, b = -6, c = -16;
+
+        if (solution[0] * solution[0] * a + solution[0] * b + c != 0f) {
+            throw Muli.fail();
+        }
+        if (solution[1] * solution[1] * a + solution[1] * b + c != 0f) {
             throw Muli.fail();
         }
 
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] < 10) {
-                throw Muli.fail();
-            }
-
-            if (i != 0) {
-                if (arr[i] < arr[i - 1]) {
-                    throw Muli.fail();
-                }
-            }
+        if (solution[0] == solution[1]) {
+            throw Muli.fail();
         }
 
-        return arr;
+        return solution;
     }
 }
