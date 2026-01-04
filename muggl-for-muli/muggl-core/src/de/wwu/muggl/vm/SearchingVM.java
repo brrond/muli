@@ -66,11 +66,11 @@ public abstract class SearchingVM extends VirtualMachine {
 	 * @param instruction The instruction that wants to generate the choice points.
 	 * @param generator A variable Generator. May be null to indicate no custom variable generator is used.
 	 * @param type A String representation of the type.
-	 * @throws ExecutionException If an Exception is thrown during the choice point generation.
+	 * @throws SymbolicExecutionException If an Exception is thrown during the choice point generation.
 	 */
 	public abstract void generateNewChoicePoint(GeneralInstructionWithOtherBytes instruction,
 			de.wwu.muggl.symbolic.generating.Generator generator, String type)
-			throws ExecutionException;
+			throws SymbolicExecutionException;
 
 	/**
 	 * Generate a new choice point for LCmp instruction.
@@ -78,10 +78,10 @@ public abstract class SearchingVM extends VirtualMachine {
 	 * @param instruction The LCmp instruction generating the choice point.
 	 * @param leftTerm The left term of the comparison.
 	 * @param rightTerm The right term of the comparison.
-	 * @throws ExecutionException If an exception is thrown during choice point generation.
+	 * @throws SymbolicExecutionException If an exception is thrown during choice point generation.
 	 */
 	public abstract void generateNewChoicePoint(de.wwu.muggl.instructions.bytecode.LCmp instruction,
-			Term leftTerm, Term rightTerm) throws ExecutionException;
+			Term leftTerm, Term rightTerm) throws SymbolicExecutionException;
 
 	/**
 	 * Generate a new choice point for CompareFp instruction.
@@ -90,13 +90,13 @@ public abstract class SearchingVM extends VirtualMachine {
 	 * @param less If true, behaves like dcmpl/fcmpl; otherwise like dcmpg/fcmpg.
 	 * @param leftTerm The left term of the comparison.
 	 * @param rightTerm The right term of the comparison.
-	 * @throws ExecutionException If an exception is thrown during choice point generation.
+	 * @throws SymbolicExecutionException If an exception is thrown during choice point generation.
 	 */
 	public abstract void generateNewChoicePoint(de.wwu.muggl.instructions.general.CompareFp instruction,
-			boolean less, Term leftTerm, Term rightTerm) throws ExecutionException;
+			boolean less, Term leftTerm, Term rightTerm) throws SymbolicExecutionException;
 
     public abstract void generateNewChoicePoint(Switch instruction, Term termFromStack, IntConstant[] keys,
-                                       int[] pcs, IntConstant low, IntConstant high) throws ExecutionException;
+                                       int[] pcs, IntConstant low, IntConstant high) throws SymbolicExecutionException;
 
 	public abstract void increaseTimeChoicePointGeneration(long increment);
 

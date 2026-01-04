@@ -703,6 +703,7 @@ public class SymbolicVirtualMachine extends SearchingVM {
 	 * @throws SymbolicExecutionException If the instruction supplied is no conditional jump, no
 	 *         load instruction or if an Exception is thrown during the choice point generation.
 	 */
+	@Override
 	public void generateNewChoicePoint(GeneralInstructionWithOtherBytes instruction,
 			Generator generator, String type)
 			throws SymbolicExecutionException {
@@ -741,6 +742,7 @@ public class SymbolicVirtualMachine extends SearchingVM {
 	 * @throws SymbolicExecutionException If an Exception is thrown during the choice point
 	 *         generation.
 	 */
+	@Override
 	public void generateNewChoicePoint(LCmp instruction, Term leftTerm, Term rightTerm)
 			throws SymbolicExecutionException {
 		// Counting the instructions before a new solution is found?
@@ -766,6 +768,7 @@ public class SymbolicVirtualMachine extends SearchingVM {
 	 * @throws SymbolicExecutionException If an Exception is thrown during the choice point
 	 *         generation.
 	 */
+	@Override
 	public void generateNewChoicePoint(CompareFp instruction, boolean less, Term leftTerm,
 			Term rightTerm) throws SymbolicExecutionException {
 		// Counting the instructions before a new solution is found?
@@ -797,6 +800,7 @@ public class SymbolicVirtualMachine extends SearchingVM {
 	 * @throws SymbolicExecutionException If an Exception is thrown during the choice point
 	 *         generation.
 	 */
+	@Override
 	public void generateNewChoicePoint(Switch instruction, Term termFromStack, IntConstant[] keys,
 			int[] pcs, IntConstant low, IntConstant high) throws SymbolicExecutionException {
 		// Counting the instructions before a new solution is found?
