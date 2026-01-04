@@ -547,13 +547,13 @@ public class LogicVirtualMachine extends SearchingVM {
 	 * @param generator A variable Generator. May be null to indicate no custom variable generator
 	 *        is used.
 	 * @param type A String representation of the type.
-	 * @throws SymbolicExecutionException If the instruction supplied is no conditional jump, no
+	 * @throws ExecutionException If the instruction supplied is no conditional jump, no
 	 *         load instruction or if an Exception is thrown during the choice point generation.
 	 */
 	@Override
 	public void generateNewChoicePoint(GeneralInstructionWithOtherBytes instruction,
 			Generator generator, String type)
-			throws SymbolicExecutionException {
+			throws ExecutionException {
         if (this.getSearchAlgorithm() == null) {
             throw new IllegalStateException("unexpected state: Trying to add a choicepoint, but no search algorithm initialised.");
         }
@@ -590,12 +590,12 @@ public class LogicVirtualMachine extends SearchingVM {
 	 *        comparison.
 	 * @param rightTerm The term of long variables and constants of the right hand side of the
 	 *        comparison.
-	 * @throws SymbolicExecutionException If an Exception is thrown during the choice point
+	 * @throws ExecutionException If an Exception is thrown during the choice point
 	 *         generation.
 	 */
 	@Override
 	public void generateNewChoicePoint(LCmp instruction, Term leftTerm, Term rightTerm)
-			throws SymbolicExecutionException {
+			throws ExecutionException {
         if (this.getSearchAlgorithm() == null) {
             throw new IllegalStateException("unexpected state: Trying to add a choicepoint, but no search algorithm initialised.");
         }
@@ -620,12 +620,12 @@ public class LogicVirtualMachine extends SearchingVM {
 	 *        comparison.
 	 * @param rightTerm The term of long variables and constants of the right hand side of the
 	 *        comparison.
-	 * @throws SymbolicExecutionException If an Exception is thrown during the choice point
+	 * @throws ExecutionException If an Exception is thrown during the choice point
 	 *         generation.
 	 */
 	@Override
 	public void generateNewChoicePoint(CompareFp instruction, boolean less, Term leftTerm,
-			Term rightTerm) throws SymbolicExecutionException {
+			Term rightTerm) throws ExecutionException {
         if (this.getSearchAlgorithm() == null) {
             throw new IllegalStateException("unexpected state: Trying to add a choicepoint, but no search algorithm initialised.");
         }
@@ -656,12 +656,12 @@ public class LogicVirtualMachine extends SearchingVM {
 	 *         targets or if there are no choices at all.
 	 * @throws NullPointerException If either of the specified arrays is null, or if the instruction
 	 *         is tableswitch and at least one of the boundaries is null.
-	 * @throws SymbolicExecutionException If an Exception is thrown during the choice point
+	 * @throws ExecutionException If an Exception is thrown during the choice point
 	 *         generation.
 	 */
 	@Override
 	public void generateNewChoicePoint(Switch instruction, Term termFromStack, IntConstant[] keys,
-			int[] pcs, IntConstant low, IntConstant high) throws SymbolicExecutionException {
+			int[] pcs, IntConstant low, IntConstant high) throws ExecutionException {
 	    if (this.getSearchAlgorithm() == null) {
 	        throw new IllegalStateException("unexpected state: Trying to add a choicepoint, but no search algorithm initialised.");
         }
