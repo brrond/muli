@@ -106,7 +106,7 @@ public abstract class Load extends GeneralInstructionWithOtherBytes implements L
 	 * @throws SymbolicExecutionException Thrown in case of fatal problems during the symbolic execution.
 	 */
 	@Override
-	public void executeSymbolically(Frame frame) throws NoExceptionHandlerFoundException, SymbolicExecutionException {
+	public void executeSymbolically(Frame frame) throws NoExceptionHandlerFoundException, ExecutionException {
 		int localVariable = getLocalVariableIndex();
 		executeSymbolically(frame, localVariable);
 	}
@@ -119,7 +119,7 @@ public abstract class Load extends GeneralInstructionWithOtherBytes implements L
 	 * @throws NoExceptionHandlerFoundException If no handler could be found.
 	 * @throws SymbolicExecutionException Thrown in case of fatal problems during the symbolic execution.
 	 */
-	public void executeSymbolically(Frame frame, int localVariable) throws NoExceptionHandlerFoundException, SymbolicExecutionException {
+	public void executeSymbolically(Frame frame, int localVariable) throws NoExceptionHandlerFoundException, ExecutionException {
 		try {
 			Object[] localVariables = frame.getLocalVariables();
 

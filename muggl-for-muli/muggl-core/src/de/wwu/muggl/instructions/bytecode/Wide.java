@@ -88,7 +88,7 @@ public class Wide extends de.wwu.muggl.instructions.general.WideAbstract impleme
 	 */
 	@Override
 	public void executeSymbolically(Frame frame) throws NoExceptionHandlerFoundException,
-			SymbolicExecutionException {
+			ExecutionException {
 		try {
 			if (this.otherBytes.length == OPCODE_LENGTH_THREE) {
 				if (this.nextInstruction instanceof ALoad) {

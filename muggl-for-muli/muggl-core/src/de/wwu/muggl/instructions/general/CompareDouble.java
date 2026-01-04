@@ -5,6 +5,7 @@ import java.util.Stack;
 import de.wwu.muggl.vm.Frame;
 import de.wwu.muggl.vm.SearchingVM;
 import de.wwu.muggl.vm.classfile.ClassFile;
+import de.wwu.muggl.vm.execution.ExecutionException;
 import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
 import de.wwu.muggl.solvers.expressions.DoubleConstant;
 import de.wwu.muggl.solvers.expressions.IntConstant;
@@ -56,7 +57,7 @@ public abstract class CompareDouble extends CompareFp {
 	 *         execution.
 	 */
 	@Override
-	public void executeSymbolically(Frame frame) throws SymbolicExecutionException {
+	public void executeSymbolically(Frame frame) throws ExecutionException {
 		try {
 			Stack<Object> stack = frame.getOperandStack();
 			Term term2 = (Term) stack.pop();

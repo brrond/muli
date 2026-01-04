@@ -6,6 +6,7 @@ import de.wwu.muggl.instructions.general.CompareLong;
 import de.wwu.muggl.instructions.interfaces.Instruction;
 import de.wwu.muggl.vm.Frame;
 import de.wwu.muggl.vm.SearchingVM;
+import de.wwu.muggl.vm.execution.ExecutionException;
 import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
 import de.wwu.muggl.solvers.expressions.IntConstant;
 import de.wwu.muggl.solvers.expressions.LongConstant;
@@ -47,7 +48,7 @@ public class LCmp extends CompareLong implements Instruction {
 	 */
 	@Override
 	public void executeSymbolically(Frame frame)
-			throws SymbolicExecutionException {
+			throws ExecutionException {
 		try {
 			Stack<Object> stack = frame.getOperandStack();
 			Term term2 = (Term) stack.pop();

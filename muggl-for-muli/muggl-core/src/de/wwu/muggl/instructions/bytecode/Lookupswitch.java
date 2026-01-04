@@ -7,6 +7,7 @@ import de.wwu.muggl.vm.Frame;
 import de.wwu.muggl.vm.SearchingVM;
 import de.wwu.muggl.vm.classfile.structures.attributes.AttributeCode;
 import de.wwu.muggl.vm.classfile.structures.attributes.NoMoreCodeBytesException;
+import de.wwu.muggl.vm.execution.ExecutionException;
 import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
 import de.wwu.muggl.solvers.expressions.IntConstant;
 import de.wwu.muggl.solvers.expressions.Term;
@@ -85,7 +86,7 @@ public class Lookupswitch extends Switch implements Instruction {
 	 * @throws SymbolicExecutionException Thrown in case of fatal problems during the symbolic execution.
 	 */
 	@Override
-	public void executeSymbolically(Frame frame) throws SymbolicExecutionException {
+	public void executeSymbolically(Frame frame) throws ExecutionException {
 		Term key = (Term) frame.getOperandStack().pop();
 		// Check if the key is constant.
 		if (key.isConstant()) {
