@@ -199,7 +199,7 @@ public abstract class Load extends GeneralInstructionWithOtherBytes implements L
 
 			// Push it onto the stack.
 			frame.getOperandStack().push(object);
-		} catch (SymbolicExecutionException e) {
+		} catch (ExecutionException e) {
 			executionFailedSymbolically(e);
 		}
 	}

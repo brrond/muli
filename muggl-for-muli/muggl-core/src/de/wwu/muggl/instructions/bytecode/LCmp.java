@@ -72,7 +72,7 @@ public class LCmp extends CompareLong implements Instruction {
 			 */
 			((SearchingVM) frame.getVm()).generateNewChoicePoint(this, term1, term2);
 			}
-		} catch (SymbolicExecutionException e) {
+		} catch (ExecutionException e) {
 			symbolicExecutionFailedWithAnExecutionException(e);
 		}
 	}
