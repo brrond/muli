@@ -994,4 +994,22 @@ public class LogicVirtualMachine extends SearchingVM {
     public List<ST> getAllSearchTreesDebug() {
         return this.searchStrategies.values().stream().map(LogicIteratorSearchAlgorithm::getSearchTreeDebug).collect(Collectors.toList());
     }
+
+    /**
+     * Report that an array generator was used (for statistics).
+     * Empty implementation as LogicVirtualMachine doesn't track this statistic.
+     */
+    @Override
+    public void reportArrayGenerator() {
+        // Empty implementation - no statistics tracking in LogicVirtualMachine
+    }
+
+    /**
+     * Report that an array was generated (for statistics).
+     * Empty implementation as LogicVirtualMachine doesn't track this statistic.
+     */
+    @Override
+    public void reportGeneratedArray() {
+        // Empty implementation - no statistics tracking in LogicVirtualMachine
+    }
 }

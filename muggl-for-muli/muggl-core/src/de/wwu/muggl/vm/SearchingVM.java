@@ -125,4 +125,14 @@ public abstract class SearchingVM extends VirtualMachine {
 	public abstract FreeObjectref getAFreeObjectref(ClassFile classFile);
 
 	public abstract Objectref getAPrimitiveWrapperObjectref(ClassFile classFile) throws PrimitiveWrappingImpossibleException;
+
+	/**
+	 * Report that an array generator was used (for statistics).
+	 */
+	public abstract void reportArrayGenerator();
+
+	/**
+	 * Report that an array was generated (for statistics).
+	 */
+	public abstract void reportGeneratedArray();
 }

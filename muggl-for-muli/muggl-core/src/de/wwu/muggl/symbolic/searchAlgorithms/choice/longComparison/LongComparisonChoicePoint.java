@@ -8,8 +8,8 @@ import de.wwu.muggl.solvers.SolverManager;
 import de.wwu.muggl.symbolic.searchAlgorithms.choice.ChoicePoint;
 import de.wwu.muggl.symbolic.searchAlgorithms.depthFirst.trailelements.TrailElement;
 import de.wwu.muggl.vm.Frame;
+import de.wwu.muggl.vm.SearchingVM;
 import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
-import de.wwu.muggl.vm.impl.symbolic.SymbolicVirtualMachine;
 import de.wwu.muggl.solvers.exceptions.SolverUnableToDecideException;
 import de.wwu.muggl.solvers.exceptions.TimeoutException;
 import de.wwu.muggl.solvers.expressions.ConstraintExpression;
@@ -80,7 +80,7 @@ public class LongComparisonChoicePoint implements ChoicePoint {
 		boolean measureExecutionTime = Options.getInst().measureSymbolicExecutionTime;
 
 		// Get the SolverManager.
-		SolverManager solverManager = ((SymbolicVirtualMachine) frame.getVm()).getSolverManager();
+		SolverManager solverManager = ((SearchingVM) frame.getVm()).getSolverManager();
 
 		boolean success = false;
 		long timeSolvingTemp = 0L;
@@ -116,7 +116,7 @@ public class LongComparisonChoicePoint implements ChoicePoint {
 				throw new SymbolicExecutionException("The first term is neither less than, greater than or equal to the second one. This is impossible and hints to serious problems.");
 		}
 		// Save the execution time.
-		if (measureExecutionTime) ((SymbolicVirtualMachine) frame.getVm()).increaseTimeSolvingForChoicePointGeneration(System.nanoTime() - timeSolvingTemp);
+		if (measureExecutionTime) ((SearchingVM) frame.getVm()).increaseTimeSolvingForChoicePointGeneration(System.nanoTime() - timeSolvingTemp);
 
         // Graph visualisation.
         this.idNumber = nextIdNumber++;

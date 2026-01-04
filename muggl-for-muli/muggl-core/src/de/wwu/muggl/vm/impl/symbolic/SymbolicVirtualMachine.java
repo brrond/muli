@@ -1135,6 +1135,7 @@ public class SymbolicVirtualMachine extends SearchingVM {
 	/**
 	 * Report that another array generator is used.
 	 */
+	@Override
 	public void reportArrayGenerator() {
 		this.arraysGeneratorsUsed++;
 	}
@@ -1142,6 +1143,7 @@ public class SymbolicVirtualMachine extends SearchingVM {
 	/**
 	 * Report that another array was generated.
 	 */
+	@Override
 	public void reportGeneratedArray() {
 		this.arraysGenerated++;
 	}

@@ -10,9 +10,8 @@ import de.wwu.muggl.symbolic.generating.ArrayElementsGeneratorProvider;
 import de.wwu.muggl.symbolic.searchAlgorithms.choice.ChoicePoint;
 import de.wwu.muggl.symbolic.searchAlgorithms.depthFirst.trailelements.TrailElement;
 import de.wwu.muggl.vm.Frame;
+import de.wwu.muggl.vm.SearchingVM;
 import de.wwu.muggl.vm.classfile.ClassFileException;
-import de.wwu.muggl.vm.impl.symbolic.SymbolicExecutionException;
-import de.wwu.muggl.vm.impl.symbolic.SymbolicVirtualMachine;
 import de.wwu.muggl.vm.initialization.ModifieableArrayref;
 import de.wwu.muggl.vm.initialization.ReferenceValue;
 import de.wwu.muggl.solvers.expressions.ConstraintExpression;
@@ -139,7 +138,7 @@ public class ArrayInitializationChoicePoint implements ChoicePoint {
 		changeToNextChoice();
 		
 		// Report the instantiation.
-		((SymbolicVirtualMachine) frame.getVm()).reportArrayGenerator();
+		((SearchingVM) frame.getVm()).reportArrayGenerator();
     }
 
     @Override
@@ -181,7 +180,7 @@ public class ArrayInitializationChoicePoint implements ChoicePoint {
 		changeToNextChoice();
 		
 		// Report the instantiation.
-		((SymbolicVirtualMachine) frame.getVm()).reportArrayGenerator();
+		((SearchingVM) frame.getVm()).reportArrayGenerator();
 	}
 	
 
@@ -380,7 +379,7 @@ public class ArrayInitializationChoicePoint implements ChoicePoint {
 			// Count up!
 			this.numberOfRunsYet++;
 			this.newArrayPrepared = true;
-			((SymbolicVirtualMachine) this.frame.getVm()).reportGeneratedArray();
+			((SearchingVM) this.frame.getVm()).reportGeneratedArray();
 		} else {
 			throw new IllegalStateException("There are no more choices.");
 		}
