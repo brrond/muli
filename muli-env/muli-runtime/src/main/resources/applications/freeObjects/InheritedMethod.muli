@@ -3,7 +3,7 @@ package applications.freeObjects;
 import java.util.List;
 import de.wwu.muli.*;
 import de.wwu.muli.solution.*;
-import applications.freeObjects.pojo.*;
+import applications.freeObjects.pojo3.*;
 
 public class InheritedMethod {
 
@@ -12,7 +12,8 @@ public class InheritedMethod {
   }
 
   private static String search() {
-      Rectangle r = new Rectangle(); Square sq = new Square();
+    Rectangle r = new Rectangle(); Square sq = new Square();
+    Cube c = new Cube(); Cuboid cuboid = new Cuboid();
     Shape s free;
     if (s.getArea() == 16) {
       return s.getClass().getName();

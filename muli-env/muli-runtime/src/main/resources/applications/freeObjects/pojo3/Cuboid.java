@@ -4,7 +4,7 @@ public class Cuboid extends Rectangle {
     public int length;
 
     public int getArea() {
-        return this.width * this.height * this.length;
+        return 2 * (this.width * this.height + this.width * this.length + this.height * this.length);
     }
 
     public String toString() {

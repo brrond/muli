@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="muli-classpath" target="1.8" />
       <module name="muli-classpath.main" target="1.8" />
       <module name="muli-classpath.test" target="1.8" />
     </bytecodeTargetLevel>
