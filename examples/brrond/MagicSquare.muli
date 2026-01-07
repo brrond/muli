@@ -1,0 +1,98 @@
+package brrond;
+
+import de.wwu.muli.*;
+import de.wwu.muli.solution.*;
+
+public class MagicSquare {
+
+    public static void main(String[] args) {
+          int[][] initState = new int[][] {
+            {0, 21, 0, 0, 0},
+            {15, 10, 0, 0, 0},
+            {0, 9, 0, 0, 0},
+            {11, 0, 0, 0, 25},
+            {0, 0, 0, 19, 0}
+          };
+          Solution<Object> solution = Muli.getOneSolution(() -> MagicSquare.solve(initState, 65));
+
+          int[] sol = (int[])solution.value;
+          System.out.println("The len is: " + sol.length);
+
+          int gridSize = (int)Math.sqrt(sol.length);
+          for (int i = 0; i < sol.length; i++) {
+              System.out.print(sol[i] + " ");
+              if ((i + 1) % gridSize == 0) {
+                System.out.println();
+              }
+          }
+          System.out.println();
+      }
+
+    private static int[] solve(int[][] init, int requiredSum) {
+        int[] solution free;
+
+        int n = init.length;
+        if (solution.length != n * n) {
+            throw Muli.fail();
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int k = i * n + j;
+
+                // Make sure that the range is 1 to 25
+                if (solution[k] < 1 || solution[k] > 25) {
+                    throw Muli.fail();
+                }
+
+                // Copy init state if necessary
+                if (init[i][j] == 0) continue;
+                if (solution[k] != init[i][j]) {
+                    throw Muli.fail();
+                }
+            }
+        }
+
+        int d1Sum = 0, d2Sum = 0;
+        for (int i = 0; i < n; i++) {
+            if (getSumOfTheRow(solution, i, n) != requiredSum ||
+                getSumOfTheColumn(solution, i, n) != requiredSum) {
+                throw Muli.fail();
+            }
+
+            d1Sum += solution[i * n + i];
+            d2Sum += solution[i * n + n - i - 1];
+        }
+
+        if (d1Sum != requiredSum || d2Sum != requiredSum) {
+            throw Muli.fail();
+        }
+
+        boolean[] usedNums free;
+        for (int i = 0; i < n * n; i++) {
+            if (usedNums[solution[i]]) {
+                throw Muli.fail();
+            }
+            usedNums[solution[i]] = true;
+        }
+
+
+        return solution;
+    }
+
+    private static int getSumOfTheRow(int[] arr, int i, int n) {
+        int sum = 0;
+        for (int j = 0; j < n; j++) {
+            sum += arr[i * n + j];
+        }
+        return sum;
+    }
+
+    private static int getSumOfTheColumn(int[] arr, int i, int n) {
+        int sum = 0;
+        for (int j = 0; j < n; j++) {
+            sum += arr[j * n + i];
+        }
+        return sum;
+    }
+}
