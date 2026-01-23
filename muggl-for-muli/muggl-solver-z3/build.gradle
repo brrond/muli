@@ -2,9 +2,10 @@ apply plugin: 'java'
 apply plugin: 'com.google.osdetector'
 
 dependencies {
-	compile project(':muggl-common')
-	compile project(':muggl-solvers')
-	compile files('../lib/z3-4.8.8-x64-'+getZ3Arch()+'/bin/com.microsoft.z3.jar')
+    implementation 'log4j:log4j:1.2.17'
+	implementation project(':muggl-common')
+	implementation project(':muggl-solvers')
+	implementation files('../lib/z3-4.8.8-x64-'+getZ3Arch()+'/bin/com.microsoft.z3.jar')
 } 
 
 def static getZ3Arch(){

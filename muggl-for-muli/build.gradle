@@ -16,7 +16,7 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
-        maven { url 'http://maven-eclipse.github.io/maven' }
+        maven { url 'https://maven-eclipse.github.io/maven' }
         flatDir { dirs '../lib' }
     }
 

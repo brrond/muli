@@ -1,13 +1,14 @@
 apply plugin: 'java'
 
 dependencies {
-	runtime project(':muggl-solver-muconst')
-	runtime project(':muggl-solver-jacop')
-	runtime project(':muggl-solver-z3')
-	compile project(':muggl-solvers')
-	compile project(':muggl-common')
-    compile 'org.apache.bcel:bcel:6.2'
-} 
+	runtimeOnly project(':muggl-solver-muconst')
+	runtimeOnly project(':muggl-solver-jacop')
+	runtimeOnly project(':muggl-solver-z3')
+	implementation project(':muggl-solvers')
+	implementation project(':muggl-common')
+    implementation 'org.apache.bcel:bcel:6.2'
+    implementation 'log4j:log4j:1.2.17'
+}
 
 sourceSets {
 	main.java.srcDir "src"

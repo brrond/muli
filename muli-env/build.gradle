@@ -6,7 +6,7 @@ plugins {
 allprojects { // Except muli runtime; that declares its own
     apply plugin: 'java' // required for adding JUnit 4 dep
     apply plugin: 'eclipse'
-    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
     apply plugin: 'jacoco'
     group = 'de.wwu.muggl'
     version = '2.0.4-MULI-SNAPSHOT'
@@ -16,16 +16,15 @@ allprojects { // Except muli runtime; that declares its own
     repositories {
         jcenter()
         mavenCentral()
-        maven { url 'http://maven-eclipse.github.io/maven' }
+        maven { url 'https://maven-eclipse.github.io/maven' }
         flatDir { dirs '../lib' }
     }
 
     dependencies {
-        testCompile "junit:junit:4.+"
+        testImplementation "junit:junit:4.+"
     }
 
 	task sourcesJar(type: Jar, dependsOn: classes) {
-		classifier = 'sources'
 		from sourceSets.main.allSource
 	}
 
@@ -48,10 +47,6 @@ task codeCoverageReport(type: JacocoReport) {
     }
 
     reports {
-        xml.enabled true
-        xml.destination "${buildDir}/reports/jacoco/report.xml"
-        html.enabled false
-        csv.enabled false
     }
 }
 

@@ -1,0 +1,41 @@
+package brrond;
+
+import de.wwu.muli.*;
+import de.wwu.muli.solution.*;
+
+public class SumHolder {
+    int sum;
+}
+
+public class Sum {
+
+    public static void main(String[] args) {
+          Solution<Object>[] solutions = Muli.getAllSolutions(Sum::solve);
+
+          for (Solution<Object> solution : solutions) {
+              SumHolder sum = (SumHolder)solution.value;
+              System.out.println(sum.sum);
+          }
+      }
+
+    private static SumHolder solve() {
+        SumHolder sum = new SumHolder();
+
+        int i free;
+        if (i < 0) {
+            throw Muli.fail();
+        }
+
+        if (i > 10) {
+            throw Muli.fail();
+        }
+
+        while (i < 10) {
+            sum.sum += i;
+
+            i++;
+        }
+
+        return sum;
+    }
+}
