@@ -2,7 +2,7 @@ package applications.freeObjects.pojo3;
 
 public class Cube extends Square {
     public int getArea() {
-        return this.width * this.width * this.width;
+        return this.width * this.width * 6;
     }
 
     public String toString() {

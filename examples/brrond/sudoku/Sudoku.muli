@@ -58,6 +58,7 @@ public class Sudoku {
     private static int SIZE = 9;
     private static int[][] initialState = new int[SIZE][SIZE];
     private static int[][] solvedState = new int[SIZE][SIZE];
+    private static int blockSize = 3;
 
     public static void main(String[] args) {
 
@@ -110,14 +111,14 @@ public class Sudoku {
         Solution<Object> solution = Muli.getOneSolution(Sudoku::solve);
         Board board = (Board) solution.value;
 
-        Sudoku.solvedState = solvedState;
+        if (solvedState != null) {
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    int k = i * SIZE + j;
 
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                int k = i * SIZE + j;
-
-                if (board.arr[k] != solvedState[i][j]) {
-                    throw new RuntimeException("Wrong solution");
+                    if (board.arr[k] != solvedState[i][j]) {
+                        throw new RuntimeException("Wrong solution");
+                    }
                 }
             }
         }
@@ -171,44 +172,28 @@ public class Sudoku {
             }
         }
 
-        // I2d doesn't work:
-        /*
-        General exception of type java.lang.ClassCastException: java.lang.Integer cannot be cast to de.wwu.muggl.solvers.expressions.Term
-        java.lang.ClassCastException: java.lang.Integer cannot be cast to de.wwu.muggl.solvers.expressions.Term
-        	at de.wwu.muggl.instructions.bytecode.I2d.executeSymbolically(I2d.java:39)
-        	at de.wwu.muggl.instructions.interfaces.Instruction.executeMuli(Instruction.java:37)
-        	at de.wwu.muli.vm.LogicVirtualMachine.executeInstruction(LogicVirtualMachine.java:408)
-        	at de.wwu.muggl.vm.VirtualMachine.executeFrame(VirtualMachine.java:826)
-        	at de.wwu.muggl.vm.VirtualMachine.runMainLoop(VirtualMachine.java:731)
-        	at de.wwu.muli.vm.LogicVirtualMachine.runMainLoop(LogicVirtualMachine.java:371)
-        	at de.wwu.muggl.vm.VirtualMachine.run(VirtualMachine.java:350)
-        */
-        int blockSize = 3;
-        if (blockSize * blockSize == SIZE) {
+        // Iterate over all blocks
+        // number of blocks == blockSize
+        for (int i = 0; i < blockSize; i++) {
+            for (int j = 0; j < blockSize; j++) {
 
-            // Iterate over all blocks
-            // number of blocks == blockSize
-            for (int i = 0; i < blockSize; i++) {
-                for (int j = 0; j < blockSize; j++) {
+                // Iterate over all elements in one block
+                for (int k = 0; k < blockSize; k++) {
+                    for (int l = 0; l < blockSize; l++) {
 
-                    // Iterate over all elements in one block
-                    for (int k = 0; k < blockSize; k++) {
-                        for (int l = 0; l < blockSize; l++) {
+                        // Iterate over all other elements in block
+                        for (int k1 = 0; k1 < blockSize; k1++) {
+                            for (int l1 = 0; l1 < blockSize; l1++) {
 
-                            // Iterate over all other elements in block
-                            for (int k1 = 0; k1 < blockSize; k1++) {
-                                for (int l1 = 0; l1 < blockSize; l1++) {
+                                // Skip current
+                                if (k1 == k && l1 == l) {
+                                    continue;
+                                }
 
-                                    // Skip current
-                                    if (k1 == k && l1 == l) {
-                                        continue;
-                                    }
-
-                                    // Ensure the elements
-                                    if (arr[i * SIZE * blockSize + j * blockSize + k * SIZE + l] ==
-                                        arr[i * SIZE * blockSize + j * blockSize + k1 * SIZE + l1]) {
-                                        throw Muli.fail();
-                                    }
+                                // Ensure the elements
+                                if (arr[i * SIZE * blockSize + j * blockSize + k * SIZE + l] ==
+                                    arr[i * SIZE * blockSize + j * blockSize + k1 * SIZE + l1]) {
+                                    throw Muli.fail();
                                 }
                             }
                         }
